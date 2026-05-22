@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ЧИЗ «Коянды» — Частная Индустриальная Зона</title>
+<meta name="description" content="Частная Индустриальная зона «Коянды» — специализированная площадка для размещения промышленных и логистических предприятий рядом с Астаной. Налоговые льготы, готовая инфраструктура, полное сопровождение.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060912;
+  --bg2: #0c1220;
+  --bg3: #111928;
+  --card: rgba(255,255,255,0.035);
+  --card-h: rgba(255,255,255,0.065);
+  --border: rgba(255,255,255,0.07);
+  --border-h: rgba(196,157,58,0.45);
+  --gold: #c49d3a;
+  --gold2: #e8c96a;
+  --gold3: rgba(196,157,58,0.12);
+  --text: #edf2ff;
+  --text2: rgba(237,242,255,0.5);
+  --text3: rgba(237,242,255,0.25);
+  --r: 14px;
+  --r2: 10px;
+  --nav: 68px;
+  --pad: 110px;
+  --display: 'Unbounded', sans-serif;
+  --body: 'Onest', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(196,157,58,0.3);color:#fff}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(196,157,58,0.35);border-radius:2px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--body);cursor:pointer}
+
+/* GRID BG */
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 100%)}
+.orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(196,157,58,0.07) 0%,transparent 70%);top:-300px;left:-200px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(56,100,200,0.07) 0%,transparent 70%);bottom:20%;right:-200px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav);display:flex;align-items:center;padding:0 48px;gap:24px;transition:background .35s,border-color .35s}
+nav.scrolled{background:rgba(6,9,18,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.logo em{font-style:normal;color:var(--gold)}
+.nav-links{display:flex;gap:2px;margin:0 auto;list-style:none}
+.nav-links a{color:var(--text2);font-size:.8rem;font-weight:400;padding:6px 12px;border-radius:8px;transition:color .2s,background .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-sw{display:flex;gap:1px}
+.lang-sw a{color:var(--text3);font-size:.7rem;padding:4px 7px;border-radius:6px;transition:color .2s;white-space:nowrap}
+.lang-sw a:hover{color:var(--gold)}
+.btn-cta{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.02em;padding:10px 20px;border-radius:10px;border:none;transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap}
+.btn-cta:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(196,157,58,.3)}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;inset:0;z-index:999;background:rgba(6,9,18,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-family:var(--display);font-size:1.4rem;font-weight:600;padding:12px 24px;border-radius:12px;transition:color .2s}
+.mobile-nav a:hover{color:var(--gold)}
+.mobile-nav .btn-cta{margin-top:16px;font-size:.9rem;padding:14px 40px}
+.mob-langs{display:flex;gap:8px;margin-top:20px}
+.mob-langs a{color:var(--text3);font-size:.85rem;padding:6px 10px;border-radius:6px;transition:color .2s}
+.mob-langs a:hover{color:var(--gold)}
+
+/* LAYOUT */
+section{position:relative;z-index:1}
+.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+
+/* HERO */
+#hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:var(--nav) 48px 80px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://thb.tildacdn.pro/tild6132-6535-4630-b263-643931633564/-/resize/504x/petf-kombinat-i-indu.jpg') center/cover no-repeat;transform:scale(1.1);filter:brightness(.2) saturate(.5)}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,18,.5) 0%,rgba(6,9,18,.55) 50%,var(--bg) 100%)}
+.hero-glow{position:absolute;width:800px;height:350px;background:radial-gradient(ellipse,rgba(196,157,58,.1) 0%,transparent 70%);top:45%;left:50%;transform:translateX(-50%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:860px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(196,157,58,.08);border:1px solid rgba(196,157,58,.22);border-radius:100px;padding:6px 16px 6px 10px;font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:32px}
+.badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pdot 2s infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+h1{font-family:var(--display);font-size:clamp(2.2rem,5.5vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.04em;margin-bottom:24px}
+h1 .g{color:var(--gold)}
+.hero-sub{font-size:clamp(.95rem,1.8vw,1.15rem);color:var(--text2);font-weight:300;line-height:1.7;margin-bottom:44px;max-width:580px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-p{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.82rem;letter-spacing:.02em;padding:14px 28px;border-radius:12px;border:none;transition:all .25s}
+.btn-p:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(196,157,58,.35)}
+.btn-s{background:rgba(255,255,255,.05);color:var(--text);font-family:var(--display);font-weight:600;font-size:.82rem;padding:14px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.12);transition:all .25s}
+.btn-s:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:72px;flex-wrap:wrap}
+.hs{text-align:center}
+.hs-n{font-family:var(--display);font-size:2.2rem;font-weight:800;color:var(--gold);letter-spacing:-.04em}
+.hs-l{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text3);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;animation:sb 2.2s ease-in-out infinite}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent)}
+@keyframes sb{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:.9;transform:translateX(-50%) translateY(8px)}}
+
+/* SECTION HEADER */
+.sec-lbl{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.sec-lbl::before{content:'';display:block;width:18px;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--display);font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:16px}
+.sec-sub{font-size:.95rem;color:var(--text2);font-weight:300;line-height:1.75;max-width:580px}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:background .3s,border-color .3s,transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,157,58,.04) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.card:hover{background:var(--card-h);border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.45),0 0 0 1px rgba(196,157,58,.08)}
+.card:hover::before{opacity:1}
+
+/* VIDEO */
+#video{padding:var(--pad) 0}
+.vid-hd{text-align:center;margin-bottom:52px}
+.vid-hd .sec-sub{margin:12px auto 0}
+.vid-wrap{border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 40px 100px rgba(0,0,0,.6);aspect-ratio:16/9;background:#000}
+.vid-wrap iframe{width:100%;height:100%;border:none}
+.photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.photo-row .ph{border-radius:12px;overflow:hidden;border:1px solid var(--border);aspect-ratio:16/9}
+.photo-row .ph img{width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.65);transition:filter .4s}
+.photo-row .ph:hover img{filter:brightness(.8) saturate(.9)}
+
+/* ABOUT */
+#about{padding:var(--pad) 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img{border-radius:18px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;position:relative}
+.about-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(.75)}
+.about-img-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,9,18,.45) 0%,transparent 60%)}
+.about-text .sec-sub{max-width:100%;margin-top:24px;font-size:1rem;line-height:1.85}
+.stat-list{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.stat-row{display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:18px 22px;transition:border-color .3s}
+.stat-row:hover{border-color:rgba(196,157,58,.25)}
+.stat-n{font-family:var(--display);font-size:1.9rem;font-weight:800;color:var(--gold);letter-spacing:-.04em;white-space:nowrap;min-width:80px}
+.stat-info-l{font-size:.82rem;color:var(--text);font-weight:500}
+.stat-info-d{font-size:.72rem;color:var(--text3);margin-top:2px}
+
+/* INFRA */
+#infra{padding:var(--pad) 0}
+.infra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}
+.infra-grid .card:nth-child(5){grid-column:span 2}
+.ic-ico{font-size:1.8rem;margin-bottom:14px}
+.ic-t{font-family:var(--display);font-size:.95rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+.ic-d{font-size:.83rem;color:var(--text2);line-height:1.75}
+
+/* PREFERENCES */
+#preferences{padding:var(--pad) 0}
+.pref-hd{text-align:center;margin-bottom:56px}
+.pref-hd .sec-sub{margin:14px auto 0}
+.pref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pc-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(196,157,58,.1);border:1px solid rgba(196,157,58,.2);border-radius:8px;padding:4px 12px;font-size:.7rem;color:var(--gold);font-weight:600;letter-spacing:.04em;margin-bottom:16px}
+.pc-t{font-family:var(--display);font-size:.95rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+.pc-d{font-size:.82rem;color:var(--text2);line-height:1.75;margin-bottom:16px}
+.tax-table{width:100%;border-collapse:collapse;margin-top:10px}
+.tax-table td{padding:5px 0;font-size:.8rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04)}
+.tax-table td:first-child{color:var(--text);font-weight:500}
+.tax-table td:last-child{text-align:right;color:var(--gold);font-weight:600}
+
+/* RESIDENTS */
+#residents{padding:var(--pad) 0}
+.res-hd{text-align:center;margin-bottom:56px}
+.res-hd .sec-sub{margin:12px auto 0}
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.res-tag{display:inline-block;background:rgba(196,157,58,.08);border:1px solid rgba(196,157,58,.18);border-radius:6px;padding:3px 10px;font-size:.67rem;color:var(--gold);letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.res-name{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.35}
+.res-desc{font-size:.83rem;color:var(--text2);line-height:1.75}
+.res-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;color:var(--gold);font-size:.78rem;font-weight:600;transition:gap .2s}
+.res-link:hover{gap:10px}
+.cta-block{background:linear-gradient(135deg,rgba(196,157,58,.1) 0%,rgba(196,157,58,.03) 100%);border:1px solid rgba(196,157,58,.22);border-radius:var(--r);padding:44px;text-align:center;grid-column:span 2}
+.cta-block h3{font-family:var(--display);font-size:1.55rem;font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
+.cta-block p{color:var(--text2);margin-bottom:28px;line-height:1.75;max-width:540px;margin-left:auto;margin-right:auto}
+
+/* SERVICES */
+#services{padding:var(--pad) 0}
+.srv-hd{text-align:center;margin-bottom:56px}
+.srv-hd .sec-sub{margin:12px auto 0}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.srv-ico{font-size:2.2rem;margin-bottom:18px}
+.srv-t{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.srv-d{font-size:.83rem;color:var(--text2);line-height:1.75}
+
+/* INVESTMENTS */
+#investments{padding:var(--pad) 0}
+.inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.inv-text .sec-sub{max-width:100%;line-height:1.85;margin-top:22px}
+.inv-nums{display:flex;gap:16px;margin-top:28px;flex-wrap:wrap}
+.inv-num{flex:1;min-width:130px;background:linear-gradient(135deg,rgba(196,157,58,.13) 0%,rgba(196,157,58,.04) 100%);border:1px solid rgba(196,157,58,.18);border-radius:var(--r);padding:22px;text-align:center}
+.inv-num .n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:var(--gold);letter-spacing:-.03em;margin-bottom:6px}
+.inv-num .l{font-size:.72rem;color:var(--text2);line-height:1.55}
+.srv-icons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.si{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px;text-align:center;transition:border-color .3s,background .3s}
+.si:hover{border-color:rgba(196,157,58,.28);background:var(--card-h)}
+.si .e{font-size:1.4rem;margin-bottom:7px}
+.si .l{font-size:.7rem;color:var(--text2);line-height:1.45}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-n{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.75rem;font-weight:700;color:var(--gold);flex-shrink:0;background:rgba(196,157,58,.07)}
+.step-time{font-size:.67rem;color:var(--gold);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.step-t{font-family:var(--display);font-size:.92rem;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.step-d{font-size:.82rem;color:var(--text2);line-height:1.75}
+
+/* DIRECTIONS */
+#directions{padding:var(--pad) 0}
+.dir-hd{text-align:center;margin-bottom:56px}
+.dir-hd .sec-sub{margin:12px auto 0}
+.dir-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dir-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 18px;transition:all .3s}
+.dir-card:hover{background:var(--card-h);border-color:rgba(196,157,58,.28);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.dir-e{font-size:1.8rem;margin-bottom:12px}
+.dir-t{font-family:var(--display);font-size:.82rem;font-weight:700;letter-spacing:-.01em;line-height:1.35;margin-bottom:8px}
+.dir-d{font-size:.75rem;color:var(--text3);line-height:1.6}
+
+/* NEWS */
+#news{padding:var(--pad) 0}
+.news-hd{text-align:center;margin-bottom:56px}
+.news-hd .sec-sub{margin:12px auto 0}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.nd{font-size:.68rem;color:var(--gold);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:12px}
+.nt{font-family:var(--display);font-size:.9rem;font-weight:700;letter-spacing:-.02em;line-height:1.45;margin-bottom:12px;flex:1}
+.ns{font-size:.8rem;color:var(--text2);line-height:1.65}
+.n-arr{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:.75rem;font-weight:600;margin-top:16px;cursor:pointer;transition:gap .2s}
+.n-arr:hover{gap:10px}
+.news-card{display:flex;flex-direction:column}
+
+/* TEAM */
+#team{padding:var(--pad) 0}
+.team-hd{text-align:center;margin-bottom:56px}
+.team-hd .sec-sub{margin:12px auto 0}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tc-role{font-size:.67rem;color:var(--gold);font-weight:600;letter-spacing:.09em;text-transform:uppercase;margin-bottom:10px}
+.tc-name{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.tc-title{font-size:.78rem;color:var(--text2);margin-bottom:14px}
+.tc-desc{font-size:.8rem;color:var(--text3);line-height:1.75}
+
+/* PARTNERS */
+#partners{padding:var(--pad) 0;overflow:hidden}
+.partners-hd{text-align:center;margin-bottom:56px}
+.partners-hd .sec-sub{margin:12px auto 0}
+.track-wrap{overflow:hidden;position:relative}
+.track-wrap::before,.track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.track-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.track-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.track{display:flex;gap:20px;animation:scroll 32s linear infinite;width:max-content}
+.track:hover{animation-play-state:paused}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.p-logo{height:70px;background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:10px 22px;flex-shrink:0;transition:border-color .3s,background .3s;min-width:150px}
+.p-logo:hover{border-color:rgba(196,157,58,.28);background:rgba(196,157,58,.04)}
+.p-logo img{max-height:42px;max-width:110px;object-fit:contain;filter:brightness(.65) grayscale(.3);transition:filter .3s}
+.p-logo:hover img{filter:brightness(1) grayscale(0)}
+
+/* CONTACTS */
+#contacts{padding:var(--pad) 0}
+.con-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px}
+.con-info{display:flex;flex-direction:column;gap:22px}
+.con-item{display:flex;gap:16px;align-items:flex-start}
+.con-ico{width:40px;height:40px;border-radius:10px;background:rgba(196,157,58,.08);border:1px solid rgba(196,157,58,.18);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.cl{font-size:.7rem;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.07em}
+.cv{font-size:.9rem;font-weight:500;transition:color .2s}
+a.cv:hover{color:var(--gold)}
+.socials{display:flex;gap:10px;margin-top:14px}
+.soc-btn{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 16px;font-size:.8rem;font-weight:500;transition:all .25s}
+.soc-btn:hover{border-color:rgba(196,157,58,.38);background:rgba(196,157,58,.07);color:var(--gold)}
+.con-note{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.75rem;color:var(--text3);line-height:1.65;margin-top:8px}
+.form-box{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:36px}
+.form-t{font-family:var(--display);font-size:1.25rem;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.form-sub{font-size:.82rem;color:var(--text2);margin-bottom:26px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.fg label{font-size:.7rem;color:var(--text3);font-weight:500;letter-spacing:.04em}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:11px 15px;color:var(--text);font-family:var(--body);font-size:15px;outline:none;transition:border-color .2s,background .2s;width:100%}
+.fg select option{background:#0c1220;color:var(--text)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(196,157,58,.45);background:rgba(196,157,58,.04)}
+.fg textarea{resize:vertical;min-height:96px}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text3)}
+.btn-submit{width:100%;background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.9rem;letter-spacing:.02em;padding:14px;border-radius:12px;border:none;transition:all .25s;margin-top:6px}
+.btn-submit:hover{background:var(--gold2);box-shadow:0 8px 24px rgba(196,157,58,.3);transform:translateY(-1px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;z-index:1}
+.foot-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.foot-logo{font-family:var(--display);font-weight:800;font-size:1.1rem;letter-spacing:-.02em;margin-bottom:12px}
+.foot-logo em{font-style:normal;color:var(--gold)}
+.foot-desc{font-size:.78rem;color:var(--text3);line-height:1.75;margin-bottom:18px}
+.foot-col-t{font-family:var(--display);font-size:.8rem;font-weight:700;letter-spacing:-.01em;margin-bottom:14px}
+.foot-links{display:flex;flex-direction:column;gap:8px}
+.foot-links a,.foot-link-btn{color:var(--text3);font-size:.78rem;transition:color .2s;background:none;border:none;text-align:left;padding:0;font-family:var(--body);cursor:pointer}
+.foot-links a:hover,.foot-link-btn:hover{color:var(--gold)}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:22px;border-top:1px solid var(--border);font-size:.72rem;color:var(--text3)}
+
+/* FLOATING */
+.float-cta{position:fixed;bottom:26px;right:26px;z-index:900}
+.float-btn{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.78rem;letter-spacing:.01em;padding:12px 20px;border-radius:100px;border:none;box-shadow:0 8px 28px rgba(196,157,58,.4);transition:all .25s;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.float-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 38px rgba(196,157,58,.5)}
+.scroll-top{position:fixed;bottom:26px;left:26px;z-index:900;width:42px;height:42px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all .3s}
+.scroll-top.vis{opacity:1;pointer-events:all}
+.scroll-top:hover{background:rgba(196,157,58,.1);border-color:rgba(196,157,58,.28);color:var(--gold);transform:translateY(-2px)}
+
+/* MODAL */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-ov.open{opacity:1;pointer-events:all}
+.modal-box{background:#0d1828;border:1px solid rgba(196,157,58,.18);border-radius:18px;padding:38px;max-width:500px;width:100%;position:relative;transform:translateY(18px) scale(.97);transition:transform .3s;max-height:88vh;overflow-y:auto}
+.modal-ov.open .modal-box{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.modal-t{font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.modal-s{font-size:.83rem;color:var(--text2);margin-bottom:26px}
+.modal-body{font-size:.83rem;color:var(--text2);line-height:1.82}
+.modal-body h3{font-family:var(--display);font-size:.9rem;color:var(--text);margin:16px 0 7px;font-weight:700}
+
+/* TOAST */
+.toast-wrap{position:fixed;top:22px;right:22px;z-index:9999;display:flex;flex-direction:column;gap:9px;pointer-events:none}
+.toast{background:#0d1f35;border:1px solid rgba(196,157,58,.28);border-radius:12px;padding:13px 18px;font-size:.83rem;color:var(--text);box-shadow:0 8px 30px rgba(0,0,0,.4);transform:translateX(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:10px;pointer-events:all}
+.toast.show{transform:translateX(0)}
+
+/* COOKIE */
+.cookie{position:fixed;bottom:0;left:0;right:0;z-index:1500;background:rgba(6,9,18,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;gap:22px;transition:transform .4s}
+.cookie.hidden{transform:translateY(110%)}
+.cookie-txt{font-size:.78rem;color:var(--text2);line-height:1.6;flex:1}
+.cookie-txt button{color:var(--gold);background:none;border:none;font-size:inherit;cursor:pointer;font-family:var(--body)}
+.cookie-acc{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.78rem;padding:9px 22px;border-radius:9px;border:none;flex-shrink:0;transition:all .2s;cursor:pointer}
+.cookie-acc:hover{background:var(--gold2)}
+
+/* ANIMATIONS */
+.fu{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+.fu-1{transition-delay:.1s}
+.fu-2{transition-delay:.2s}
+.fu-3{transition-delay:.3s}
+.fu-4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .dir-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:900px){
+  :root{--pad:72px}
+  .nav-links,.nav-right .lang-sw,.btn-cta{display:none}
+  .burger{display:flex}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .infra-grid{grid-template-columns:1fr 1fr}
+  .infra-grid .card:nth-child(5){grid-column:span 1}
+  .pref-grid{grid-template-columns:1fr}
+  .res-grid{grid-template-columns:1fr}
+  .cta-block{grid-column:span 1}
+  .srv-grid{grid-template-columns:1fr}
+  .inv-grid{grid-template-columns:1fr;gap:40px}
+  .news-grid{grid-template-columns:1fr 1fr}
+  .con-grid{grid-template-columns:1fr;gap:40px}
+  .f-row{grid-template-columns:1fr}
+  .foot-inner{grid-template-columns:1fr 1fr}
+  .wrap{padding:0 24px}
+  nav{padding:0 24px}
+  .cookie{padding:16px 24px;flex-direction:column}
+}
+@media(max-width:600px){
+  :root{--pad:56px}
+  .infra-grid{grid-template-columns:1fr}
+  .dir-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .foot-inner{grid-template-columns:1fr;gap:28px}
+  .foot-bottom{flex-direction:column;gap:8px;text-align:center}
+  .hero-stats{gap:22px}
+  .photo-row{grid-template-columns:1fr}
+  .float-cta{bottom:18px;right:18px}
+  .scroll-top{bottom:18px;left:18px}
+  .modal-box{padding:26px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="orb orb1" aria-hidden="true"></div>
+<div class="orb orb2" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo" aria-label="ЧИЗ Коянды">ЧИЗ <em>«Коянды»</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">О зоне</a></li>
+    <li><a href="#infra">Инфраструктура</a></li>
+    <li><a href="#preferences">Преференции</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#investments">Инвестиции</a></li>
+    <li><a href="#news">Новости</a></li>
+    <li><a href="#contacts">Контакты</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <a href="#">RU</a><a href="#">KZ</a><a href="#">EN</a><a href="#">ZH</a>
+    </div>
+    <button class="btn-cta" onclick="openModal('modalForm')">Оставить заявку</button>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#about" class="mnl">О зоне</a>
+  <a href="#infra" class="mnl">Инфраструктура</a>
+  <a href="#preferences" class="mnl">Преференции</a>
+  <a href="#services" class="mnl">Услуги</a>
+  <a href="#investments" class="mnl">Инвестиции</a>
+  <a href="#news" class="mnl">Новости</a>
+  <a href="#contacts" class="mnl">Контакты</a>
+  <button class="btn-cta" style="font-size:.9rem;padding:14px 40px;border-radius:12px;margin-top:16px" onclick="openModal('modalForm');closeMobile()">Оставить заявку</button>
+  <div class="mob-langs"><a href="#">RU</a><a href="#">KZ</a><a href="#">EN</a><a href="#">ZH</a></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Казахстан · Акмолинская область · Астана
+    </div>
+    <h1>Частная Индустриальная<br>зона <span class="g">«Коянды»</span></h1>
+    <p class="hero-sub">Ваш бизнес — наша территория развития. Готовая инфраструктура, налоговые льготы и полное сопровождение от идеи до запуска производства.</p>
+    <div class="hero-btns">
+      <button class="btn-p" onclick="openModal('modalForm')">Оставить заявку</button>
+      <a href="#about" class="btn-s">Узнать больше</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">200+</div><div class="hs-l">Га территории</div></div>
+      <div class="hs"><div class="hs-n">3+</div><div class="hs-l">Резидента</div></div>
+      <div class="hs"><div class="hs-n">2019</div><div class="hs-l">Год основания</div></div>
+      <div class="hs"><div class="hs-n">0%</div><div class="hs-l">Налог КПН</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="wrap">
+    <div class="vid-hd fu">
+      <div class="sec-lbl">Видеообзор</div>
+      <h2 class="sec-title">Фотогалерея и видео ЧИЗ «Коянды»</h2>
+      <p class="sec-sub">Посмотрите на территорию индустриальной зоны, реализующиеся проекты и инфраструктуру.</p>
+    </div>
+    <div class="vid-wrap fu fu-1">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="ЧИЗ Коянды" loading="lazy"></iframe>
+    </div>
+    <div class="photo-row fu fu-2">
+      <div class="ph"><img src="https://thb.tildacdn.pro/tild6132-6535-4630-b263-643931633564/-/resize/504x/petf-kombinat-i-indu.jpg" alt="ЧИЗ Коянды" loading="lazy"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1565793359-c79e02dc4b70?w=800&q=70" alt="Производство" loading="lazy"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=70" alt="Логистика" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="fu">
+        <div class="sec-lbl">О зоне</div>
+        <h2 class="sec-title">О Частной<br>Индустриальной зоне</h2>
+        <p class="sec-sub">ЧИЗ «Коянды» — специализированная площадка для размещения промышленных и логистических предприятий с полным пакетом инфраструктурных решений. Благодаря выгодному расположению рядом с Астаной и готовой инженерной инфраструктуре, зона позволяет быстро запустить производство и оптимизировать издержки.</p>
+        <div class="stat-list">
+          <div class="stat-row">
+            <div class="stat-n">200+</div>
+            <div><div class="stat-info-l">Гектаров площади</div><div class="stat-info-d">Общая территория индустриальной зоны</div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-n">3</div>
+            <div><div class="stat-info-l">Действующих резидента</div><div class="stat-info-d">Компании, реализующие стратегические проекты</div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-n">2019</div>
+            <div><div class="stat-info-l">Год основания</div><div class="stat-info-d">На основании Закона РК от 03.04.2019</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-img fu fu-2">
+        <img src="https://thb.tildacdn.pro/tild6132-6535-4630-b263-643931633564/-/resize/504x/petf-kombinat-i-indu.jpg" alt="ЧИЗ Коянды — территория" loading="lazy">
+        <div class="about-img-ov"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFRA -->
+<section id="infra">
+  <div class="wrap">
+    <div class="fu">
+      <div class="sec-lbl">Инфраструктура</div>
+      <h2 class="sec-title">Готовая инфраструктура<br>для вашего производства</h2>
+    </div>
+    <div class="infra-grid">
+      <div class="card fu fu-1">
+        <div class="ic-ico">📍</div>
+        <div class="ic-t">Стратегическое расположение</div>
+        <p class="ic-d">Вдоль республиканской трассы Астана–Павлодар, отличная транспортная доступность. Ворота в центральноазиатские рынки.</p>
+      </div>
+      <div class="card fu fu-2">
+        <div class="ic-ico">⚡</div>
+        <div class="ic-t">Электроснабжение</div>
+        <p class="ic-d">Технические условия на подключение мощности от 6 до 25 МВАт. Стабильное и масштабируемое энергоснабжение.</p>
+      </div>
+      <div class="card fu fu-3">
+        <div class="ic-ico">💧</div>
+        <div class="ic-t">Водоснабжение</div>
+        <p class="ic-d">На территории пробурены две скважины с объёмом подачи 560 кубов в сутки каждая.</p>
+      </div>
+      <div class="card fu fu-1">
+        <div class="ic-ico">🔥</div>
+        <div class="ic-t">Газоснабжение (в перспективе)</div>
+        <p class="ic-d">Планируется подведение газовой инфраструктуры до конца 2025 года.</p>
+      </div>
+      <div class="card fu fu-2">
+        <div class="ic-ico">🚧</div>
+        <div class="ic-t">Подъездная дорога</div>
+        <p class="ic-d">Организован и засыпан щебнем подъездной путь к объекту, обеспечивающий надёжный круглогодичный доступ для тяжёлой техники.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREFERENCES -->
+<section id="preferences">
+  <div class="wrap">
+    <div class="pref-hd fu">
+      <div class="sec-lbl">Преференции</div>
+      <h2 class="sec-title">Раскройте потенциал<br>своего бизнеса</h2>
+      <p class="sec-sub">Используйте налоговые льготы, упрощённые таможенные процедуры и доступ к квалифицированным кадрам.</p>
+    </div>
+    <div class="pref-grid">
+      <div class="card fu fu-1">
+        <div class="pc-badge">💰 Налоговые льготы</div>
+        <div class="pc-t">Максимальные преференции</div>
+        <p class="pc-d">Значительные налоговые преференции для повышения рентабельности и ускорения развития бизнеса.</p>
+        <table class="tax-table">
+          <tr><td>КПН</td><td>20% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td>НДС</td><td>12% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td>Налог на имущество</td><td>1,5% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td>Таможенные пошлины</td><td>до 30% → <strong style="color:var(--gold)">0%</strong></td></tr>
+        </table>
+      </div>
+      <div class="card fu fu-2">
+        <div class="pc-badge">🏗️ Инфраструктурная помощь</div>
+        <div class="pc-t">Полное сопровождение</div>
+        <p class="pc-d">Полное сопровождение проектов: от подключения коммуникаций до поддержки в проектировании и строительстве. Управляющая компания помогает согласовать все технические условия и обеспечивает быстрый запуск объекта.</p>
+      </div>
+      <div class="card fu fu-3">
+        <div class="pc-badge">📋 Административная поддержка</div>
+        <div class="pc-t">Без бюрократических барьеров</div>
+        <p class="pc-d">Консультации и помощь при регистрации бизнеса, получении разрешений и лицензий. Упрощённое взаимодействие с государственными органами через управляющую компанию.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESIDENTS -->
+<section id="residents">
+  <div class="wrap">
+    <div class="res-hd fu">
+      <div class="sec-lbl">Резиденты</div>
+      <h2 class="sec-title">Резиденты ЧИЗ «Коянды»</h2>
+      <p class="sec-sub">Компании, реализующие стратегически важные проекты на территории индустриальной зоны.</p>
+    </div>
+    <div class="res-grid">
+      <div class="card fu fu-1">
+        <div class="res-tag">Агропром · Молочная продукция</div>
+        <div class="res-name">ТОО «ИНИПП AGRO HOLDING BAYAN»</div>
+        <p class="res-desc">Строительство комплекса по производству эко-молочных лечебно-профилактических продуктов питания, обогащённых пектином, инулином и витаминами для недропользователей.</p>
+        <a href="https://invest.gov.kz/doing-business-here/invest-projects/25485/" target="_blank" rel="noopener" class="res-link">Подробнее →</a>
+      </div>
+      <div class="card fu fu-2">
+        <div class="res-tag">Экоупаковка · Логистика</div>
+        <div class="res-name">ТОО «JV ECOLEAN SERVICE»</div>
+        <p class="res-desc">Специализируется на поставках и реэкспорте инновационной экологически чистой упаковки для жидких пищевых продуктов. Экологичная упаковка / Логистика / Реэкспорт.</p>
+        <span class="res-link" style="cursor:default">Резидент зоны</span>
+      </div>
+      <div class="card fu fu-3">
+        <div class="res-tag">Комбикорма · Животноводство</div>
+        <div class="res-name">ТОО AGRO COMBINAT KZ</div>
+        <p class="res-desc">Производство экологически чистых комбикормов для крупного рогатого скота, мелкого рогатого скота, лошадей, птиц и диких животных.</p>
+        <a href="https://cloud.mail.ru/public/z8XE/KY9HTg5o4" target="_blank" rel="noopener" class="res-link">Подробнее →</a>
+      </div>
+      <div class="cta-block fu fu-4">
+        <h3>Здесь может быть ваш проект</h3>
+        <p>Станьте частью индустриального роста Казахстана. ЧИЗ «Коянды» предоставляет инфраструктуру, льготы и полное сопровождение от идеи до запуска производства.</p>
+        <button class="btn-p" onclick="openModal('modalForm')">Оставить заявку</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="srv-hd fu">
+      <div class="sec-lbl">Услуги</div>
+      <h2 class="sec-title">Наша комплексная поддержка</h2>
+      <p class="sec-sub">Управляющая компания предоставляет широкий спектр услуг для комфортного инвестиционного процесса.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="card fu fu-1">
+        <div class="srv-ico">📊</div>
+        <div class="srv-t">Разработка бизнес-проектов</div>
+        <p class="srv-d">Консультации и разработка проектов в различных отраслях промышленности, включая машиностроение, пищевую и лёгкую промышленность. Полный цикл от идеи до ТЭО.</p>
+      </div>
+      <div class="card fu fu-2">
+        <div class="srv-ico">📄</div>
+        <div class="srv-t">Получение необходимых разрешений</div>
+        <p class="srv-d">Помощь в оформлении и получении всех необходимых документов и разрешений для запуска производства. Юридическое сопровождение на всех этапах.</p>
+      </div>
+      <div class="card fu fu-3">
+        <div class="srv-ico">🏢</div>
+        <div class="srv-t">Сопровождение строительства</div>
+        <p class="srv-d">Организация и контроль строительства объектов под ключ, включая подключение к инфраструктуре и соблюдение всех строительных норм Казахстана.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENTS -->
+<section id="investments">
+  <div class="wrap">
+    <div class="inv-grid">
+      <div class="fu">
+        <div class="sec-lbl">Инвестиции</div>
+        <h2 class="sec-title">Инвестиционные<br>возможности</h2>
+        <p class="sec-sub">Управляющая компания ЧИЗ «Коянды» не только предоставляет готовую инфраструктуру, но и активно содействует привлечению финансирования от международных банков развития — ЕБРР, АБР и других.</p>
+        <div class="inv-nums">
+          <div class="inv-num"><div class="n">$5–25 млн</div><div class="l">Объём финансируемых проектов</div></div>
+          <div class="inv-num"><div class="n">15–20%</div><div class="l">Минимальное собственное участие</div></div>
+        </div>
+        <div class="srv-icons">
+          <div class="si"><div class="e">🗺️</div><div class="l">Подбор участка</div></div>
+          <div class="si"><div class="e">📋</div><div class="l">Согласование ТУ</div></div>
+          <div class="si"><div class="e">⚖️</div><div class="l">Юр. сопровождение</div></div>
+          <div class="si"><div class="e">💰</div><div class="l">Финансирование</div></div>
+          <div class="si"><div class="e">🏗️</div><div class="l">Строительство</div></div>
+          <div class="si"><div class="e">🚀</div><div class="l">Запуск</div></div>
+        </div>
+      </div>
+      <div class="fu fu-2">
+        <div class="sec-lbl" style="margin-bottom:22px">Этапы запуска</div>
+        <h3 class="sec-title" style="font-size:1.55rem;margin-bottom:8px">Условия партнёрства<br>и этапы запуска</h3>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:28px;line-height:1.75">Сопровождаем проект от идеи до запуска производства.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">1</div>
+            <div><div class="step-time">1–2 месяца</div><div class="step-t">Первичная заявка и партнёрская модель</div><p class="step-d">Управляющая компания сотрудничает с проектодержателями на условиях долевого партнёрства (от 10 до 30%), предоставляя участок, инфраструктуру и административное сопровождение.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-n">2</div>
+            <div><div class="step-time">3–6 месяцев</div><div class="step-t">Финансовые условия и подтверждение проекта</div><p class="step-d">После признания проекта соответствующим критериям, проектодержатель оплачивает 1% от стоимости проекта — административная экспертиза и резервирование участка.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-n">3</div>
+            <div><div class="step-time">2–3 месяца</div><div class="step-t">Подписание соглашения и запуск проектных работ</div><p class="step-d">Подписание соглашения о размещении, юридическое оформление участка, подключение к коммуникациям и запуск проектно-строительных работ.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTIONS -->
+<section id="directions">
+  <div class="wrap">
+    <div class="dir-hd fu">
+      <div class="sec-lbl">Направления</div>
+      <h2 class="sec-title">Приоритетные направления<br>ЧИЗ «Коянды»</h2>
+      <p class="sec-sub">Поддерживаем инвестиционные проекты в ключевых отраслях для устойчивого роста Казахстана.</p>
+    </div>
+    <div class="dir-grid">
+      <div class="dir-card fu fu-1"><div class="dir-e">🌾</div><div class="dir-t">Сельское хозяйство и продовольственная безопасность</div><p class="dir-d">Агропромышленные комплексы, перерабатывающие производства.</p></div>
+      <div class="dir-card fu fu-2"><div class="dir-e">☀️</div><div class="dir-t">Альтернативная энергетика</div><p class="dir-d">Солнечная, ветровая и биогазовая энергетика.</p></div>
+      <div class="dir-card fu fu-3"><div class="dir-e">♻️</div><div class="dir-t">Переработка отходов</div><p class="dir-d">Сбор, сортировка и переработка промышленных и бытовых отходов.</p></div>
+      <div class="dir-card fu fu-4"><div class="dir-e">💊</div><div class="dir-t">Здравоохранение и фармацевтика</div><p class="dir-d">Фармацевтические производства и медицинские лаборатории.</p></div>
+      <div class="dir-card fu fu-1"><div class="dir-e">⚙️</div><div class="dir-t">Промышленное производство</div><p class="dir-d">Машиностроение, лёгкая промышленность, упаковка.</p></div>
+      <div class="dir-card fu fu-2"><div class="dir-e">✈️</div><div class="dir-t">Авиация</div><p class="dir-d">Производство компонентов, логистика в сфере авиации.</p></div>
+      <div class="dir-card fu fu-3"><div class="dir-e">🚚</div><div class="dir-t">Транспорт и логистика</div><p class="dir-d">Складские центры, мультимодальные платформы.</p></div>
+      <div class="dir-card fu fu-4"><div class="dir-e">🏙️</div><div class="dir-t">Градостроительство и инфраструктура</div><p class="dir-d">Комплексное развитие инженерной инфраструктуры.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="wrap">
+    <div class="news-hd fu">
+      <div class="sec-lbl">Новости и СМИ</div>
+      <h2 class="sec-title">Новости и публикации в СМИ</h2>
+      <p class="sec-sub">Следите за развитием ЧИЗ «Коянды» через официальные анонсы и публикации в деловых изданиях.</p>
+    </div>
+    <div class="news-grid">
+      <div class="card news-card fu fu-1"><a href="https://forbes.kz/articles/investor-iz-emiratov-stroit-v-akmolinskoy-oblasti-molochnyy-zavod-e7df09"><div class="nd">24 июня 2025</div><div class="nt">Инвестор из Эмиратов строит в Акмолинской области молочный завод</div><div class="ns">Международное сотрудничество в рамках ЧИЗ «Коянды» расширяется.</div><div class="n-arr">Читать →</div></a></div>
+      <div class="card news-card fu fu-2"><div class="nd">8 мая 2025</div><div class="nt">Церемония закладки камня проекта Biolife Proprevit состоится 24 июня 2025 года</div><div class="ns">ТОО «ИНИИП AGROHOLDING BAYAN» запускает строительство молочного комплекса.</div><div class="n-arr">Читать →</div></div>
+      <div class="card news-card fu fu-3"><div class="nd">24 апреля 2025</div><div class="nt">Новый молочный проект с хорватским участием стартует в Казахстане</div><div class="ns">Азамат Панбаев встретился с послом Республики Хорватия.</div><div class="n-arr">Читать →</div></div>
+      <div class="card news-card fu fu-1"><div class="nd">24 апреля 2025</div><div class="nt">Молочный завод для горняков и шахтёров построят под Астаной</div><div class="ns">Новый проект для обеспечения питанием работников горнодобывающей отрасли.</div><div class="n-arr">Читать →</div></div>
+      <div class="card news-card fu fu-2"><div class="nd">11 февраля 2025</div><div class="nt">Министр транспорта встретился с Председателем совета директоров «Exim Finance»</div><div class="ns">Переговоры о финансировании крупных инфраструктурных проектов.</div><div class="n-arr">Читать →</div></div>
+      <div class="card news-card fu fu-3"><div class="nd">10 февраля 2025</div><div class="nt">Инвесторы обсудили перспективы развития индустриальной зоны «Коянды»</div><div class="ns">Стратегическая сессия с международными инвесторами и госорганами.</div><div class="n-arr">Читать →</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <div class="team-hd fu">
+      <div class="sec-lbl">Команда</div>
+      <h2 class="sec-title">Команда ЧИЗ «Коянды»</h2>
+      <p class="sec-sub">Специалисты, обеспечивающие профессиональное сопровождение инвестиционных проектов.</p>
+    </div>
+    <div class="team-grid">
+      <div class="card fu fu-1"><div class="tc-role">Руководство</div><div class="tc-name">Абай Искаков</div><div class="tc-title">Генеральный директор Управляющей компании ЧИЗ «Коянды»</div><p class="tc-desc">Отвечает за стратегическое развитие и общее руководство проектом. Благодаря его опыту и видению, ЧИЗ «Коянды» становится точкой притяжения для инвесторов.</p></div>
+      <div class="card fu fu-2"><div class="tc-role">Управление проектами</div><div class="tc-name">Дана Нургали</div><div class="tc-title">Куратор проектов · Директор по работе со строительными компаниями</div><p class="tc-desc">Сопровождает каждый строительный проект от чертежа до ввода в эксплуатацию. Координирует взаимодействие с подрядчиками.</p></div>
+      <div class="card fu fu-3"><div class="tc-role">Строительство</div><div class="tc-name">Алихан Мазиев</div><div class="tc-title">Генеральный подрядчик</div><p class="tc-desc">Более 30 лет опыта в строительной сфере. Отвечает за реализацию всех строительных работ: от организации площадки до финального контроля качества.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="wrap">
+    <div class="partners-hd fu">
+      <div class="sec-lbl">Партнёры</div>
+      <h2 class="sec-title">Наши партнёры</h2>
+      <p class="sec-sub">Сотрудничаем с ведущими компаниями для поддержки проектов на территории индустриальной зоны.</p>
+    </div>
+  </div>
+  <div class="track-wrap fu">
+    <div class="track">
+      <a href="https://eximfinance.ae/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3165-3465-4732-a135-383061383862/-/empty/exim_finance_logo.webp" alt="Exim Finance" loading="lazy"></a>
+      <a href="https://sinitech.eu/en/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3563-6463-4330-b462-383366616263/-/empty/sinitech_industries_.jpeg" alt="Sinitech" loading="lazy"></a>
+      <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6237-3064-4434-b131-633735363034/-/empty/sp-7b014bcf696d5e520.png" alt="Ecolean" loading="lazy"></a>
+      <a href="https://www.anr-engineering.de/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6333-3235-4938-b633-306464316635/-/empty/image-911x759_2.png" alt="ANR Engineering" loading="lazy"></a>
+      <a href="https://www.hbor.hr/en" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3265-6331-4332-b263-343966623466/-/empty/croatia.jpg" alt="HBOR" loading="lazy"></a>
+      <a href="https://www.elofhansson.com/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6132-3434-4432-a335-346630333262/-/empty/elof_hansson_lumber_.webp" alt="Elof Hansson" loading="lazy"></a>
+      <a href="https://invest.gov.kz/ru/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6133-6334-4932-b938-646534663662/-/empty/ade0c0eb62f99675e935.png" alt="Invest.gov.kz" loading="lazy"></a>
+      <a href="https://www.antastransport.com/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6462-3734-4230-a164-373235613832/-/empty/_WhatsApp_2025-05-10.jpg" alt="Antas" loading="lazy"></a>
+      <a href="https://kan-kaz.org/main.php" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3432-6537-4737-b065-643632353138/-/empty/image_3.png" alt="KAN" loading="lazy"></a>
+      <a href="https://agun.kz/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6330-3062-4062-b538-663639383834/-/empty/image_4.png" alt="AGUN" loading="lazy"></a>
+      <!-- duplicate for loop -->
+      <a href="https://eximfinance.ae/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3165-3465-4732-a135-383061383862/-/empty/exim_finance_logo.webp" alt="" loading="lazy"></a>
+      <a href="https://sinitech.eu/en/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3563-6463-4330-b462-383366616263/-/empty/sinitech_industries_.jpeg" alt="" loading="lazy"></a>
+      <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6237-3064-4434-b131-633735363034/-/empty/sp-7b014bcf696d5e520.png" alt="" loading="lazy"></a>
+      <a href="https://www.anr-engineering.de/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6333-3235-4938-b633-306464316635/-/empty/image-911x759_2.png" alt="" loading="lazy"></a>
+      <a href="https://www.hbor.hr/en" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3265-6331-4332-b263-343966623466/-/empty/croatia.jpg" alt="" loading="lazy"></a>
+      <a href="https://www.elofhansson.com/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6132-3434-4432-a335-346630333262/-/empty/elof_hansson_lumber_.webp" alt="" loading="lazy"></a>
+      <a href="https://invest.gov.kz/ru/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6133-6334-4932-b938-646534663662/-/empty/ade0c0eb62f99675e935.png" alt="" loading="lazy"></a>
+      <a href="https://www.antastransport.com/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6462-3734-4230-a164-373235613832/-/empty/_WhatsApp_2025-05-10.jpg" alt="" loading="lazy"></a>
+      <a href="https://kan-kaz.org/main.php" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3432-6537-4737-b065-643632353138/-/empty/image_3.png" alt="" loading="lazy"></a>
+      <a href="https://agun.kz/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6330-3062-4062-b538-663639383834/-/empty/image_4.png" alt="" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts">
+  <div class="wrap">
+    <div class="con-grid">
+      <div class="fu">
+        <div class="sec-lbl">Контакты</div>
+        <h2 class="sec-title">Свяжитесь<br>с нами</h2>
+        <p class="sec-sub" style="margin-bottom:38px">Мы предоставляем помощь и консультации по вопросам инвестиций и развития бизнеса в регионе.</p>
+        <div class="con-info">
+          <div class="con-item">
+            <div class="con-ico">📞</div>
+            <div><div class="cl">Телефон</div><a href="tel:+77055531751" class="cv">+7 705 553 17 51</a></div>
+          </div>
+          <div class="con-item">
+            <div class="con-ico">📧</div>
+            <div><div class="cl">Email</div><a href="mailto:info@chizkoyandy.kz" class="cv">info@chizkoyandy.kz</a></div>
+          </div>
+          <div class="con-item">
+            <div class="con-ico">📍</div>
+            <div><div class="cl">Адрес</div><span class="cv">Частная Индустриальная зона «Коянды», Акмолинская область</span></div>
+          </div>
+        </div>
+        <div class="socials">
+          <a href="https://wa.me/77055531751" target="_blank" rel="noopener" class="soc-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="https://www.instagram.com/koyandyzone/" target="_blank" rel="noopener" class="soc-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+        </div>
+        <div class="con-note" style="margin-top:22px">Создана на основании Закона РК от 03.04.2019 года «О специальных экономических и индустриальных зонах в Республике Казахстан»</div>
+      </div>
+      <div class="form-box fu fu-2">
+        <div class="form-t">Отправить запрос</div>
+        <div class="form-sub">Оставьте заявку — наша команда свяжется с вами в течение рабочего дня.</div>
+        <form id="contactForm" novalidate>
+          <div class="f-row">
+            <div class="fg"><label for="c_name">Имя *</label><input type="text" id="c_name" placeholder="Ваше имя" required></div>
+            <div class="fg"><label for="c_company">Компания</label><input type="text" id="c_company" placeholder="Название компании"></div>
+          </div>
+          <div class="f-row">
+            <div class="fg"><label for="c_phone">Телефон *</label><input type="tel" id="c_phone" placeholder="+7 ___" required></div>
+            <div class="fg"><label for="c_email">Email *</label><input type="email" id="c_email" placeholder="email@company.com" required></div>
+          </div>
+          <div class="fg">
+            <label for="c_industry">Отрасль</label>
+            <select id="c_industry">
+              <option value="">Выберите отрасль</option>
+              <option>Сельское хозяйство</option><option>Энергетика</option><option>Переработка отходов</option>
+              <option>Фармацевтика</option><option>Промышленность</option><option>Авиация</option>
+              <option>Логистика</option><option>Другое</option>
+            </select>
+          </div>
+          <div class="fg"><label for="c_msg">Сообщение</label><textarea id="c_msg" placeholder="Опишите ваш проект или вопрос..."></textarea></div>
+          <button type="submit" class="btn-submit">Отправить запрос</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <div class="foot-logo">ЧИЗ <em>«Коянды»</em></div>
+        <p class="foot-desc">Частная Индустриальная зона «Коянды» — специализированная площадка для промышленных и логистических предприятий рядом с Астаной, Казахстан.</p>
+        <div class="socials">
+          <a href="https://wa.me/77055531751" target="_blank" rel="noopener" class="soc-btn" style="font-size:.72rem;padding:8px 13px">WhatsApp</a>
+          <a href="https://www.instagram.com/koyandyzone/" target="_blank" rel="noopener" class="soc-btn" style="font-size:.72rem;padding:8px 13px">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-col-t">Навигация</div>
+        <div class="foot-links">
+          <a href="#about">О зоне</a><a href="#infra">Инфраструктура</a>
+          <a href="#preferences">Преференции</a><a href="#residents">Резиденты</a>
+          <a href="#services">Услуги</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-col-t">Компания</div>
+        <div class="foot-links">
+          <a href="#investments">Инвестиции</a><a href="#directions">Направления</a>
+          <a href="#news">Новости</a><a href="#team">Команда</a>
+          <a href="#contacts">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-col-t">Правовая информация</div>
+        <div class="foot-links">
+          <button class="foot-link-btn" onclick="openModal('modalPrivacy')">Политика конфиденциальности</button>
+          <button class="foot-link-btn" onclick="openModal('modalTerms')">Пользовательское соглашение</button>
+          <button class="foot-link-btn" onclick="openModal('modalCookie')">Cookie-политика</button>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© ЧИЗ «Коянды», 2024. Все права защищены.</span>
+      <span>Закон РК от 03.04.2019 «О специальных экономических и индустриальных зонах»</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<button class="float-btn" style="position:fixed;bottom:26px;right:26px;z-index:900" onclick="openModal('modalForm')">💬 Оставить заявку</button>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" title="Наверх">↑</button>
+
+<!-- TOASTS -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie" id="cookie">
+  <p class="cookie-txt">Мы используем файлы cookie для улучшения работы сайта. <button onclick="openModal('modalCookie')">Политика cookie</button>.</p>
+  <button class="cookie-acc" id="cookieAcc">Принять</button>
+</div>
+
+<!-- MODAL: FORM -->
+<div class="modal-ov" id="modalForm">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalForm')">✕</button>
+    <div class="modal-t">Оставить заявку</div>
+    <div class="modal-s">Заполните форму — наша команда свяжется с вами в течение рабочего дня.</div>
+    <form id="popupForm" novalidate>
+      <div class="fg"><label for="p_name">Имя *</label><input type="text" id="p_name" placeholder="Ваше имя" required></div>
+      <div class="fg"><label for="p_phone">Телефон *</label><input type="tel" id="p_phone" placeholder="+7 ___" required></div>
+      <div class="fg"><label for="p_email">Email *</label><input type="email" id="p_email" placeholder="email@company.com" required></div>
+      <div class="fg">
+        <label for="p_ind">Отрасль</label>
+        <select id="p_ind">
+          <option value="">Выберите отрасль</option>
+          <option>Сельское хозяйство</option><option>Энергетика</option><option>Переработка отходов</option>
+          <option>Фармацевтика</option><option>Промышленность</option><option>Авиация</option>
+          <option>Логистика</option><option>Другое</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-submit">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: PRIVACY -->
+<div class="modal-ov" id="modalPrivacy">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalPrivacy')">✕</button>
+    <div class="modal-t">Политика конфиденциальности</div>
+    <div class="modal-body">
+      <h3>1. Общие положения</h3><p>Настоящая политика конфиденциальности определяет порядок обработки персональных данных пользователей сайта ЧИЗ «Коянды».</p>
+      <h3>2. Сбор данных</h3><p>Мы собираем имя, контактный телефон, email, название компании и отрасль — исключительно при добровольном заполнении форм обратной связи.</p>
+      <h3>3. Использование данных</h3><p>Данные используются для обработки запросов и консультаций по инвестиционным возможностям. Не передаются третьим лицам без согласия.</p>
+      <h3>4. Защита данных</h3><p>Мы принимаем технические и организационные меры для защиты ваших персональных данных.</p>
+      <h3>5. Контакты</h3><p>По вопросам обработки данных: info@chizkoyandy.kz</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TERMS -->
+<div class="modal-ov" id="modalTerms">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalTerms')">✕</button>
+    <div class="modal-t">Пользовательское соглашение</div>
+    <div class="modal-body">
+      <h3>1. Принятие условий</h3><p>Используя сайт ЧИЗ «Коянды», вы соглашаетесь с условиями настоящего соглашения.</p>
+      <h3>2. Использование сайта</h3><p>Сайт предназначен для предоставления информации об инвестиционных возможностях. Запрещается использование в незаконных целях.</p>
+      <h3>3. Интеллектуальная собственность</h3><p>Весь контент сайта является собственностью ЧИЗ «Коянды» или используется с разрешения правообладателей.</p>
+      <h3>4. Ограничение ответственности</h3><p>ЧИЗ «Коянды» не несёт ответственности за убытки, возникшие вследствие использования сайта.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: COOKIE -->
+<div class="modal-ov" id="modalCookie">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalCookie')">✕</button>
+    <div class="modal-t">Cookie-политика</div>
+    <div class="modal-body">
+      <h3>Что такое cookie?</h3><p>Cookie — небольшие текстовые файлы, сохраняемые на вашем устройстве при посещении сайта.</p>
+      <h3>Какие cookie мы используем?</h3>
+      <p><strong style="color:var(--text)">Необходимые:</strong> обеспечивают базовую функциональность сайта.</p>
+      <p style="margin-top:8px"><strong style="color:var(--text)">Аналитические:</strong> помогают нам улучшать сайт.</p>
+      <p style="margin-top:8px"><strong style="color:var(--text)">Функциональные:</strong> запоминают ваши предпочтения.</p>
+      <h3>Управление cookie</h3><p>Вы можете отключить cookie в настройках браузера.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', scrollY > 20); }, { passive: true });
+
+// PARALLAX
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  if (scrollY < innerHeight) heroBg.style.transform = `scale(1.1) translateY(${scrollY * 0.25}px)`;
+}, { passive: true });
+
+// BURGER
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobileNav');
+function closeMobile() {
+  mobileNav.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+burger.addEventListener('click', () => {
+  const o = mobileNav.classList.toggle('open');
+  burger.classList.toggle('open', o);
+  burger.setAttribute('aria-expanded', o);
+  document.body.style.overflow = o ? 'hidden' : '';
+});
+document.querySelectorAll('.mnl').forEach(l => l.addEventListener('click', closeMobile));
+
+// SCROLL ANIMATIONS
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fu').forEach(el => io.observe(el));
+
+// SCROLL TOP
+const st = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => { st.classList.toggle('vis', scrollY > 300); }, { passive: true });
+st.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// MODALS
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); if (!document.querySelector('.modal-ov.open')) document.body.style.overflow = ''; }
+document.querySelectorAll('.modal-ov').forEach(o => o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); }));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-ov.open').forEach(m => closeModal(m.id));
+    closeMobile();
+  }
+});
+
+// TOAST
+function toast(msg, type = 'success') {
+  const w = document.getElementById('toastWrap');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = (type === 'success' ? '✓ ' : '✕ ') + msg;
+  w.appendChild(t);
+  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 4000);
+}
+
+// FORM VALIDATION
+function validate(form) {
+  let ok = true;
+  form.querySelectorAll('[required]').forEach(f => {
+    f.style.borderColor = '';
+    const v = f.value.trim();
+    const bad = !v || (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+    if (bad) { f.style.borderColor = '#f87171'; if (ok) f.focus(); ok = false; }
+  });
+  return ok;
+}
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!validate(this)) { toast('Пожалуйста, заполните все обязательные поля.', 'error'); return; }
+  toast('Запрос успешно отправлен! Свяжемся с вами в течение рабочего дня.');
+  this.reset();
+});
+document.getElementById('popupForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!validate(this)) { toast('Пожалуйста, заполните все обязательные поля.', 'error'); return; }
+  toast('Заявка отправлена! Свяжемся с вами в ближайшее время.');
+  this.reset();
+  closeModal('modalForm');
+});
+
+// COOKIE
+const cookieBanner = document.getElementById('cookie');
+if (localStorage.getItem('ckz')) cookieBanner.classList.add('hidden');
+document.getElementById('cookieAcc').addEventListener('click', () => {
+  localStorage.setItem('ckz', '1');
+  cookieBanner.classList.add('hidden');
+});
+</script>
+</body>
+</html>
