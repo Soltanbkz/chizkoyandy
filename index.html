@@ -4,32 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ЧИЗ «Коянды» — Частная Индустриальная Зона</title>
-<meta name="description" content="Частная Индустриальная зона «Коянды» — специализированная площадка для размещения промышленных и логистических предприятий рядом с Астаной. Налоговые льготы, готовая инфраструктура, полное сопровождение.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #060912;
-  --bg2: #0c1220;
-  --bg3: #111928;
-  --card: rgba(255,255,255,0.035);
-  --card-h: rgba(255,255,255,0.065);
-  --border: rgba(255,255,255,0.07);
-  --border-h: rgba(196,157,58,0.45);
-  --gold: #c49d3a;
-  --gold2: #e8c96a;
-  --gold3: rgba(196,157,58,0.12);
-  --text: #edf2ff;
-  --text2: rgba(237,242,255,0.5);
-  --text3: rgba(237,242,255,0.25);
-  --r: 14px;
-  --r2: 10px;
-  --nav: 68px;
-  --pad: 110px;
-  --display: 'Unbounded', sans-serif;
-  --body: 'Onest', sans-serif;
+/* ─── CURSOR (desktop only) ─── */
+@media (pointer: fine) {
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none!important}
+  .cursor-ring{pointer-events:none;position:fixed;z-index:99999;top:0;left:0;mix-blend-mode:difference}
+  .cursor-dot{width:8px;height:8px;background:#c49d3a;border-radius:50%;transform:translate(-50%,-50%);transition:transform .1s,background .2s,width .2s,height .2s}
+  .cursor-circle{width:36px;height:36px;border:1.5px solid rgba(196,157,58,0.6);border-radius:50%;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.25,.46,.45,.94),height .3s cubic-bezier(.25,.46,.45,.94),opacity .3s,border-color .3s}
+  .cursor-ring.hovered .cursor-dot{width:16px;height:16px;background:#e8c96a}
+  .cursor-ring.hovered .cursor-circle{width:56px;height:56px;border-color:rgba(196,157,58,0.9)}
+  .cursor-ring.clicked .cursor-dot{transform:translate(-50%,-50%) scale(0.6)}
+  .cursor-ring.clicked .cursor-circle{width:24px;height:24px}
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+@media (pointer: coarse) {
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  .cursor-ring{display:none!important}
+}
+
+
+:root {
+  --bg:#060912;--bg2:#0c1220;--bg3:#111928;
+  --card:rgba(255,255,255,0.035);--card-h:rgba(255,255,255,0.065);
+  --border:rgba(255,255,255,0.07);--border-h:rgba(196,157,58,0.45);
+  --gold:#c49d3a;--gold2:#e8c96a;--gold3:rgba(196,157,58,0.12);
+  --text:#edf2ff;--text2:rgba(237,242,255,0.5);--text3:rgba(237,242,255,0.25);
+  --r:14px;--r2:10px;--nav:68px;--pad:110px;
+  --display:'Unbounded',sans-serif;--body:'Onest',sans-serif;
+}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::selection{background:rgba(196,157,58,0.3);color:#fff}
@@ -38,48 +41,60 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);overflow-x:h
 ::-webkit-scrollbar-thumb{background:rgba(196,157,58,0.35);border-radius:2px}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-button{font-family:var(--body);cursor:pointer}
+button{font-family:var(--body)}
 
-/* GRID BG */
+
+/* BG */
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
   background-size:56px 56px;
   mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 100%)}
 .orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0}
-.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(196,157,58,0.07) 0%,transparent 70%);top:-300px;left:-200px}
-.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(56,100,200,0.07) 0%,transparent 70%);bottom:20%;right:-200px}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(196,157,58,.07) 0%,transparent 70%);top:-300px;left:-200px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(56,100,200,.07) 0%,transparent 70%);bottom:20%;right:-200px}
+
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav);display:flex;align-items:center;padding:0 48px;gap:24px;transition:background .35s,border-color .35s}
-nav.scrolled{background:rgba(6,9,18,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav);display:flex;align-items:center;padding:0 48px;gap:24px;transition:background .35s,border-color .35s}
+nav#nav.scrolled{background:rgba(6,9,18,.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .logo{font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:6px}
 .logo em{font-style:normal;color:var(--gold)}
 .nav-links{display:flex;gap:2px;margin:0 auto;list-style:none}
 .nav-links a{color:var(--text2);font-size:.8rem;font-weight:400;padding:6px 12px;border-radius:8px;transition:color .2s,background .2s;white-space:nowrap}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
-.nav-right{display:flex;align-items:center;gap:10px}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
 .lang-sw{display:flex;gap:1px}
-.lang-sw a{color:var(--text3);font-size:.7rem;padding:4px 7px;border-radius:6px;transition:color .2s;white-space:nowrap}
-.lang-sw a:hover{color:var(--gold)}
+.lang-sw a{color:var(--text3);font-size:.7rem;padding:4px 8px;border-radius:6px;transition:color .2s,background .2s;white-space:nowrap;font-weight:500}
+.lang-sw a:hover,.lang-sw a.active{color:var(--gold);background:rgba(196,157,58,.1)}
 .btn-cta{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.02em;padding:10px 20px;border-radius:10px;border:none;transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap}
 .btn-cta:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(196,157,58,.3)}
-.burger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none}
-.burger span{display:block;width:22px;height:1.5px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
-.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.mobile-nav{display:none;position:fixed;inset:0;z-index:999;background:rgba(6,9,18,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:6px}
-.mobile-nav.open{display:flex}
-.mobile-nav a{font-family:var(--display);font-size:1.4rem;font-weight:600;padding:12px 24px;border-radius:12px;transition:color .2s}
-.mobile-nav a:hover{color:var(--gold)}
-.mobile-nav .btn-cta{margin-top:16px;font-size:.9rem;padding:14px 40px}
-.mob-langs{display:flex;gap:8px;margin-top:20px}
-.mob-langs a{color:var(--text3);font-size:.85rem;padding:6px 10px;border-radius:6px;transition:color .2s}
-.mob-langs a:hover{color:var(--gold)}
+
+
+/* BURGER */
+.burger{display:none;flex-direction:column;gap:5px;padding:10px;background:none;border:none;z-index:1100;position:relative;width:44px;height:44px;align-items:center;justify-content:center;border-radius:10px;transition:background .2s}
+.burger:hover{background:rgba(255,255,255,.07)}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text);border-radius:2px;transition:transform .35s cubic-bezier(.23,1,.32,1),opacity .25s,width .3s;transform-origin:center}
+
+
+/* MOBILE NAV OVERLAY */
+.mobile-nav{display:none;position:fixed;inset:0;z-index:1050;background:rgba(4,7,16,.97);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;transition:opacity .35s}
+.mobile-nav.open{opacity:1}
+.mobile-nav-inner{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:0 32px}
+.mobile-nav a,.mobile-nav-btn{font-family:var(--display);font-size:1.35rem;font-weight:600;padding:13px 24px;border-radius:14px;transition:color .2s,background .2s;color:var(--text2);display:block;text-align:center;width:100%;max-width:340px;border:none;background:transparent}
+.mobile-nav a:hover,.mobile-nav-btn:hover{color:var(--gold);background:rgba(196,157,58,.07)}
+.mob-cta{background:var(--gold)!important;color:#000!important;font-family:var(--display);font-weight:700;font-size:.95rem;padding:16px 48px!important;border-radius:14px!important;margin-top:20px!important}
+.mob-cta:hover{background:var(--gold2)!important}
+.mob-langs{display:flex;gap:8px;margin-top:24px}
+.mob-langs a{color:var(--text3);font-size:.85rem;padding:6px 12px;border-radius:8px;transition:color .2s,background .2s;font-weight:500}
+.mob-langs a:hover,.mob-langs a.active{color:var(--gold);background:rgba(196,157,58,.1)}
+.mob-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--text2);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.mob-close:hover{background:rgba(196,157,58,.1);border-color:rgba(196,157,58,.3);color:var(--gold)}
+
 
 /* LAYOUT */
 section{position:relative;z-index:1}
 .wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+
 
 /* HERO */
 #hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:var(--nav) 48px 80px;overflow:hidden}
@@ -96,7 +111,7 @@ h1 .g{color:var(--gold)}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn-p{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.82rem;letter-spacing:.02em;padding:14px 28px;border-radius:12px;border:none;transition:all .25s}
 .btn-p:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(196,157,58,.35)}
-.btn-s{background:rgba(255,255,255,.05);color:var(--text);font-family:var(--display);font-weight:600;font-size:.82rem;padding:14px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.12);transition:all .25s}
+.btn-s{background:rgba(255,255,255,.05);color:var(--text);font-family:var(--display);font-weight:600;font-size:.82rem;padding:14px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.12);transition:all .25s;display:inline-block}
 .btn-s:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
 .hero-stats{display:flex;gap:48px;justify-content:center;margin-top:72px;flex-wrap:wrap}
 .hs{text-align:center}
@@ -106,11 +121,13 @@ h1 .g{color:var(--gold)}
 .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent)}
 @keyframes sb{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:.9;transform:translateX(-50%) translateY(8px)}}
 
+
 /* SECTION HEADER */
 .sec-lbl{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .sec-lbl::before{content:'';display:block;width:18px;height:1px;background:var(--gold)}
 .sec-title{font-family:var(--display);font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:16px}
 .sec-sub{font-size:.95rem;color:var(--text2);font-weight:300;line-height:1.75;max-width:580px}
+
 
 /* CARD */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:background .3s,border-color .3s,transform .3s,box-shadow .3s;position:relative;overflow:hidden}
@@ -118,16 +135,18 @@ h1 .g{color:var(--gold)}
 .card:hover{background:var(--card-h);border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.45),0 0 0 1px rgba(196,157,58,.08)}
 .card:hover::before{opacity:1}
 
+
 /* VIDEO */
 #video{padding:var(--pad) 0}
 .vid-hd{text-align:center;margin-bottom:52px}
 .vid-hd .sec-sub{margin:12px auto 0}
-.vid-wrap{border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 40px 100px rgba(0,0,0,.6);aspect-ratio:16/9;background:#000}
-.vid-wrap iframe{width:100%;height:100%;border:none}
+.vid-wrap{border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 40px 100px rgba(0,0,0,.6);aspect-ratio:16/9;background:#000;position:relative}
+.vid-wrap iframe{width:100%;height:100%;border:none;display:block}
 .photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
 .photo-row .ph{border-radius:12px;overflow:hidden;border:1px solid var(--border);aspect-ratio:16/9}
 .photo-row .ph img{width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.65);transition:filter .4s}
 .photo-row .ph:hover img{filter:brightness(.8) saturate(.9)}
+
 
 /* ABOUT */
 #about{padding:var(--pad) 0}
@@ -143,6 +162,7 @@ h1 .g{color:var(--gold)}
 .stat-info-l{font-size:.82rem;color:var(--text);font-weight:500}
 .stat-info-d{font-size:.72rem;color:var(--text3);margin-top:2px}
 
+
 /* INFRA */
 #infra{padding:var(--pad) 0}
 .infra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}
@@ -150,6 +170,7 @@ h1 .g{color:var(--gold)}
 .ic-ico{font-size:1.8rem;margin-bottom:14px}
 .ic-t{font-family:var(--display);font-size:.95rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
 .ic-d{font-size:.83rem;color:var(--text2);line-height:1.75}
+
 
 /* PREFERENCES */
 #preferences{padding:var(--pad) 0}
@@ -164,6 +185,7 @@ h1 .g{color:var(--gold)}
 .tax-table td:first-child{color:var(--text);font-weight:500}
 .tax-table td:last-child{text-align:right;color:var(--gold);font-weight:600}
 
+
 /* RESIDENTS */
 #residents{padding:var(--pad) 0}
 .res-hd{text-align:center;margin-bottom:56px}
@@ -172,11 +194,12 @@ h1 .g{color:var(--gold)}
 .res-tag{display:inline-block;background:rgba(196,157,58,.08);border:1px solid rgba(196,157,58,.18);border-radius:6px;padding:3px 10px;font-size:.67rem;color:var(--gold);letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
 .res-name{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.35}
 .res-desc{font-size:.83rem;color:var(--text2);line-height:1.75}
-.res-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;color:var(--gold);font-size:.78rem;font-weight:600;transition:gap .2s}
+.res-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;color:var(--gold);font-size:.78rem;font-weight:600;transition:gap .2s;text-decoration:none}
 .res-link:hover{gap:10px}
 .cta-block{background:linear-gradient(135deg,rgba(196,157,58,.1) 0%,rgba(196,157,58,.03) 100%);border:1px solid rgba(196,157,58,.22);border-radius:var(--r);padding:44px;text-align:center;grid-column:span 2}
 .cta-block h3{font-family:var(--display);font-size:1.55rem;font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
 .cta-block p{color:var(--text2);margin-bottom:28px;line-height:1.75;max-width:540px;margin-left:auto;margin-right:auto}
+
 
 /* SERVICES */
 #services{padding:var(--pad) 0}
@@ -186,6 +209,7 @@ h1 .g{color:var(--gold)}
 .srv-ico{font-size:2.2rem;margin-bottom:18px}
 .srv-t{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .srv-d{font-size:.83rem;color:var(--text2);line-height:1.75}
+
 
 /* INVESTMENTS */
 #investments{padding:var(--pad) 0}
@@ -208,6 +232,7 @@ h1 .g{color:var(--gold)}
 .step-t{font-family:var(--display);font-size:.92rem;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
 .step-d{font-size:.82rem;color:var(--text2);line-height:1.75}
 
+
 /* DIRECTIONS */
 #directions{padding:var(--pad) 0}
 .dir-hd{text-align:center;margin-bottom:56px}
@@ -219,6 +244,7 @@ h1 .g{color:var(--gold)}
 .dir-t{font-family:var(--display);font-size:.82rem;font-weight:700;letter-spacing:-.01em;line-height:1.35;margin-bottom:8px}
 .dir-d{font-size:.75rem;color:var(--text3);line-height:1.6}
 
+
 /* NEWS */
 #news{padding:var(--pad) 0}
 .news-hd{text-align:center;margin-bottom:56px}
@@ -227,9 +253,12 @@ h1 .g{color:var(--gold)}
 .nd{font-size:.68rem;color:var(--gold);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:12px}
 .nt{font-family:var(--display);font-size:.9rem;font-weight:700;letter-spacing:-.02em;line-height:1.45;margin-bottom:12px;flex:1}
 .ns{font-size:.8rem;color:var(--text2);line-height:1.65}
-.n-arr{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:.75rem;font-weight:600;margin-top:16px;cursor:pointer;transition:gap .2s}
+.n-arr{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:.75rem;font-weight:600;margin-top:16px;transition:gap .2s}
 .n-arr:hover{gap:10px}
 .news-card{display:flex;flex-direction:column}
+a.news-card-link{display:flex;flex-direction:column;height:100%;text-decoration:none;color:inherit}
+.news-card-nolink{display:flex;flex-direction:column;height:100%}
+
 
 /* TEAM */
 #team{padding:var(--pad) 0}
@@ -240,6 +269,7 @@ h1 .g{color:var(--gold)}
 .tc-name{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
 .tc-title{font-size:.78rem;color:var(--text2);margin-bottom:14px}
 .tc-desc{font-size:.8rem;color:var(--text3);line-height:1.75}
+
 
 /* PARTNERS */
 #partners{padding:var(--pad) 0;overflow:hidden}
@@ -257,6 +287,7 @@ h1 .g{color:var(--gold)}
 .p-logo img{max-height:42px;max-width:110px;object-fit:contain;filter:brightness(.65) grayscale(.3);transition:filter .3s}
 .p-logo:hover img{filter:brightness(1) grayscale(0)}
 
+
 /* CONTACTS */
 #contacts{padding:var(--pad) 0}
 .con-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px}
@@ -266,7 +297,7 @@ h1 .g{color:var(--gold)}
 .cl{font-size:.7rem;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.07em}
 .cv{font-size:.9rem;font-weight:500;transition:color .2s}
 a.cv:hover{color:var(--gold)}
-.socials{display:flex;gap:10px;margin-top:14px}
+.socials{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 .soc-btn{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 16px;font-size:.8rem;font-weight:500;transition:all .25s}
 .soc-btn:hover{border-color:rgba(196,157,58,.38);background:rgba(196,157,58,.07);color:var(--gold)}
 .con-note{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.75rem;color:var(--text3);line-height:1.65;margin-top:8px}
@@ -284,6 +315,7 @@ a.cv:hover{color:var(--gold)}
 .btn-submit{width:100%;background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.9rem;letter-spacing:.02em;padding:14px;border-radius:12px;border:none;transition:all .25s;margin-top:6px}
 .btn-submit:hover{background:var(--gold2);box-shadow:0 8px 24px rgba(196,157,58,.3);transform:translateY(-1px)}
 
+
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;z-index:1}
 .foot-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
@@ -292,50 +324,52 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
 .foot-desc{font-size:.78rem;color:var(--text3);line-height:1.75;margin-bottom:18px}
 .foot-col-t{font-family:var(--display);font-size:.8rem;font-weight:700;letter-spacing:-.01em;margin-bottom:14px}
 .foot-links{display:flex;flex-direction:column;gap:8px}
-.foot-links a,.foot-link-btn{color:var(--text3);font-size:.78rem;transition:color .2s;background:none;border:none;text-align:left;padding:0;font-family:var(--body);cursor:pointer}
+.foot-links a,.foot-link-btn{color:var(--text3);font-size:.78rem;transition:color .2s;background:none;border:none;text-align:left;padding:0;font-family:var(--body)}
 .foot-links a:hover,.foot-link-btn:hover{color:var(--gold)}
 .foot-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:22px;border-top:1px solid var(--border);font-size:.72rem;color:var(--text3)}
 
+
 /* FLOATING */
-.float-cta{position:fixed;bottom:26px;right:26px;z-index:900}
-.float-btn{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.78rem;letter-spacing:.01em;padding:12px 20px;border-radius:100px;border:none;box-shadow:0 8px 28px rgba(196,157,58,.4);transition:all .25s;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.float-btn{position:fixed;bottom:26px;right:26px;z-index:900;background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.78rem;letter-spacing:.01em;padding:12px 20px;border-radius:100px;border:none;box-shadow:0 8px 28px rgba(196,157,58,.4);transition:all .25s;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .float-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 38px rgba(196,157,58,.5)}
 .scroll-top{position:fixed;bottom:26px;left:26px;z-index:900;width:42px;height:42px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all .3s}
 .scroll-top.vis{opacity:1;pointer-events:all}
 .scroll-top:hover{background:rgba(196,157,58,.1);border-color:rgba(196,157,58,.28);color:var(--gold);transform:translateY(-2px)}
+
 
 /* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-ov.open{opacity:1;pointer-events:all}
 .modal-box{background:#0d1828;border:1px solid rgba(196,157,58,.18);border-radius:18px;padding:38px;max-width:500px;width:100%;position:relative;transform:translateY(18px) scale(.97);transition:transform .3s;max-height:88vh;overflow-y:auto}
 .modal-ov.open .modal-box{transform:translateY(0) scale(1)}
-.modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .modal-close:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .modal-t{font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
 .modal-s{font-size:.83rem;color:var(--text2);margin-bottom:26px}
 .modal-body{font-size:.83rem;color:var(--text2);line-height:1.82}
 .modal-body h3{font-family:var(--display);font-size:.9rem;color:var(--text);margin:16px 0 7px;font-weight:700}
 
+
 /* TOAST */
 .toast-wrap{position:fixed;top:22px;right:22px;z-index:9999;display:flex;flex-direction:column;gap:9px;pointer-events:none}
 .toast{background:#0d1f35;border:1px solid rgba(196,157,58,.28);border-radius:12px;padding:13px 18px;font-size:.83rem;color:var(--text);box-shadow:0 8px 30px rgba(0,0,0,.4);transform:translateX(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:10px;pointer-events:all}
 .toast.show{transform:translateX(0)}
 
+
 /* COOKIE */
 .cookie{position:fixed;bottom:0;left:0;right:0;z-index:1500;background:rgba(6,9,18,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;gap:22px;transition:transform .4s}
 .cookie.hidden{transform:translateY(110%)}
 .cookie-txt{font-size:.78rem;color:var(--text2);line-height:1.6;flex:1}
-.cookie-txt button{color:var(--gold);background:none;border:none;font-size:inherit;cursor:pointer;font-family:var(--body)}
-.cookie-acc{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.78rem;padding:9px 22px;border-radius:9px;border:none;flex-shrink:0;transition:all .2s;cursor:pointer}
+.cookie-txt button{color:var(--gold);background:none;border:none;font-size:inherit;font-family:var(--body)}
+.cookie-acc{background:var(--gold);color:#000;font-family:var(--display);font-weight:700;font-size:.78rem;padding:9px 22px;border-radius:9px;border:none;flex-shrink:0;transition:all .2s}
 .cookie-acc:hover{background:var(--gold2)}
+
 
 /* ANIMATIONS */
 .fu{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .fu.vis{opacity:1;transform:translateY(0)}
-.fu-1{transition-delay:.1s}
-.fu-2{transition-delay:.2s}
-.fu-3{transition-delay:.3s}
-.fu-4{transition-delay:.4s}
+.fu-1{transition-delay:.1s}.fu-2{transition-delay:.2s}.fu-3{transition-delay:.3s}.fu-4{transition-delay:.4s}
+
 
 /* RESPONSIVE */
 @media(max-width:1100px){
@@ -344,7 +378,9 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
 }
 @media(max-width:900px){
   :root{--pad:72px}
-  .nav-links,.nav-right .lang-sw,.btn-cta{display:none}
+  .nav-links{display:none}
+  .nav-right .lang-sw{display:none}
+  .btn-cta{display:none}
   .burger{display:flex}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .infra-grid{grid-template-columns:1fr 1fr}
@@ -359,66 +395,100 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
   .f-row{grid-template-columns:1fr}
   .foot-inner{grid-template-columns:1fr 1fr}
   .wrap{padding:0 24px}
-  nav{padding:0 24px}
+  nav#nav{padding:0 24px}
   .cookie{padding:16px 24px;flex-direction:column}
 }
 @media(max-width:600px){
   :root{--pad:56px}
   .infra-grid{grid-template-columns:1fr}
-  .dir-grid{grid-template-columns:1fr 1fr}
+  /* Directions: 2 columns on mobile for better fit */
+  .dir-grid{grid-template-columns:1fr}
+  .dir-card{padding:16px 14px}
+  .dir-e{font-size:1.4rem;margin-bottom:8px}
+  .dir-t{font-size:.75rem}
+  .dir-d{font-size:.7rem}
   .team-grid{grid-template-columns:1fr}
   .news-grid{grid-template-columns:1fr}
   .foot-inner{grid-template-columns:1fr;gap:28px}
   .foot-bottom{flex-direction:column;gap:8px;text-align:center}
   .hero-stats{gap:22px}
   .photo-row{grid-template-columns:1fr}
-  .float-cta{bottom:18px;right:18px}
+  .float-btn{bottom:18px;right:18px}
   .scroll-top{bottom:18px;left:18px}
   .modal-box{padding:26px 20px}
+}
+@media(max-width:380px){
+  .dir-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
+
+<!-- CUSTOM CURSOR (desktop only) -->
+<div class="cursor-ring" id="cursorRing">
+  <div style="position:absolute;top:0;left:0" id="cursorDotWrap">
+    <div class="cursor-dot" id="cursorDot"></div>
+  </div>
+  <div style="position:absolute;top:0;left:0" id="cursorCircleWrap">
+    <div class="cursor-circle" id="cursorCircle"></div>
+  </div>
+</div>
+
+
 <div class="bg-grid" aria-hidden="true"></div>
 <div class="orb orb1" aria-hidden="true"></div>
 <div class="orb orb2" aria-hidden="true"></div>
 
+
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="logo" aria-label="ЧИЗ Коянды">ЧИЗ <em>«Коянды»</em></a>
+  <a href="#" class="logo">ЧИЗ <em>«Коянды»</em></a>
   <ul class="nav-links">
-    <li><a href="#about">О зоне</a></li>
-    <li><a href="#infra">Инфраструктура</a></li>
-    <li><a href="#preferences">Преференции</a></li>
-    <li><a href="#services">Услуги</a></li>
-    <li><a href="#investments">Инвестиции</a></li>
-    <li><a href="#news">Новости</a></li>
-    <li><a href="#contacts">Контакты</a></li>
+    <li><a href="#about" data-i18n="nav.about">О зоне</a></li>
+    <li><a href="#infra" data-i18n="nav.infra">Инфраструктура</a></li>
+    <li><a href="#preferences" data-i18n="nav.pref">Преференции</a></li>
+    <li><a href="#services" data-i18n="nav.services">Услуги</a></li>
+    <li><a href="#investments" data-i18n="nav.invest">Инвестиции</a></li>
+    <li><a href="#news" data-i18n="nav.news">Новости</a></li>
+    <li><a href="#contacts" data-i18n="nav.contacts">Контакты</a></li>
   </ul>
   <div class="nav-right">
     <div class="lang-sw">
-      <a href="#">RU</a><a href="#">KZ</a><a href="#">EN</a><a href="#">ZH</a>
+      <a href="#" onclick="setLang('ru');return false" class="active" id="lng-ru">RU</a>
+      <a href="#" onclick="setLang('kz');return false" id="lng-kz">KZ</a>
+      <a href="#" onclick="setLang('en');return false" id="lng-en">EN</a>
+      <a href="#" onclick="setLang('zh');return false" id="lng-zh">ZH</a>
     </div>
-    <button class="btn-cta" onclick="openModal('modalForm')">Оставить заявку</button>
+    <button class="btn-cta" onclick="openModal('modalForm')" data-i18n="cta.apply">Оставить заявку</button>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
+
 <!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobileNav">
-  <a href="#about" class="mnl">О зоне</a>
-  <a href="#infra" class="mnl">Инфраструктура</a>
-  <a href="#preferences" class="mnl">Преференции</a>
-  <a href="#services" class="mnl">Услуги</a>
-  <a href="#investments" class="mnl">Инвестиции</a>
-  <a href="#news" class="mnl">Новости</a>
-  <a href="#contacts" class="mnl">Контакты</a>
-  <button class="btn-cta" style="font-size:.9rem;padding:14px 40px;border-radius:12px;margin-top:16px" onclick="openModal('modalForm');closeMobile()">Оставить заявку</button>
-  <div class="mob-langs"><a href="#">RU</a><a href="#">KZ</a><a href="#">EN</a><a href="#">ZH</a></div>
-</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mob-close" onclick="closeMobile()">✕</button>
+  <div class="mobile-nav-inner">
+    <a href="#about" class="mnl" data-i18n="nav.about">О зоне</a>
+    <a href="#infra" class="mnl" data-i18n="nav.infra">Инфраструктура</a>
+    <a href="#preferences" class="mnl" data-i18n="nav.pref">Преференции</a>
+    <a href="#services" class="mnl" data-i18n="nav.services">Услуги</a>
+    <a href="#investments" class="mnl" data-i18n="nav.invest">Инвестиции</a>
+    <a href="#news" class="mnl" data-i18n="nav.news">Новости</a>
+    <a href="#contacts" class="mnl" data-i18n="nav.contacts">Контакты</a>
+    <button class="mobile-nav-btn mob-cta" onclick="openModal('modalForm');closeMobile()" data-i18n="cta.apply">Оставить заявку</button>
+    <div class="mob-langs">
+      <a href="#" onclick="setLang('ru');return false" id="mlng-ru" class="active">RU</a>
+      <a href="#" onclick="setLang('kz');return false" id="mlng-kz">KZ</a>
+      <a href="#" onclick="setLang('en');return false" id="mlng-en">EN</a>
+      <a href="#" onclick="setLang('zh');return false" id="mlng-zh">ZH</a>
+    </div>
+  </div>
+</div>
+
 
 <!-- HERO -->
 <section id="hero">
@@ -426,57 +496,61 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
   <div class="hero-ov"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      Казахстан · Акмолинская область · Астана
-    </div>
-    <h1>Частная Индустриальная<br>зона <span class="g">«Коянды»</span></h1>
-    <p class="hero-sub">Ваш бизнес — наша территория развития. Готовая инфраструктура, налоговые льготы и полное сопровождение от идеи до запуска производства.</p>
+    <div class="badge"><span class="badge-dot"></span><span data-i18n="hero.badge">Казахстан · Акмолинская область · Астана</span></div>
+    <h1 data-i18n="hero.title">Частная Индустриальная<br>зона <span class="g">«Коянды»</span></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Ваш бизнес — наша территория развития. Готовая инфраструктура, налоговые льготы и полное сопровождение от идеи до запуска производства.</p>
     <div class="hero-btns">
-      <button class="btn-p" onclick="openModal('modalForm')">Оставить заявку</button>
-      <a href="#about" class="btn-s">Узнать больше</a>
+      <button class="btn-p" onclick="openModal('modalForm')" data-i18n="cta.apply">Оставить заявку</button>
+      <a href="#about" class="btn-s" data-i18n="cta.learn">Узнать больше</a>
     </div>
     <div class="hero-stats">
+<<<<<<< HEAD
       <div class="hs"><div class="hs-n">200+</div><div class="hs-l">Га территории</div></div>
       <div class="hs"><div class="hs-n">3+</div><div class="hs-l">Резидента</div></div>
       <div class="hs"><div class="hs-n">2022</div><div class="hs-l">Год основания</div></div>
       <div class="hs"><div class="hs-n">0%</div><div class="hs-l">Налог КПН</div></div>
+=======
+      <div class="hs"><div class="hs-n">200+</div><div class="hs-l" data-i18n="stat.ha">Га территории</div></div>
+      <div class="hs"><div class="hs-n">3+</div><div class="hs-l" data-i18n="stat.res">Резидента</div></div>
+      <div class="hs"><div class="hs-n">2019</div><div class="hs-l" data-i18n="stat.year">Год основания</div></div>
+      <div class="hs"><div class="hs-n">0%</div><div class="hs-l" data-i18n="stat.tax">Налог КПН</div></div>
+>>>>>>> ab2497ee1735b690b376dd4e9d326ec170640f29
     </div>
   </div>
-  <div class="scroll-hint" aria-hidden="true">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
-  </div>
+  <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div><span>Scroll</span></div>
 </section>
+
 
 <!-- VIDEO -->
 <section id="video">
   <div class="wrap">
     <div class="vid-hd fu">
-      <div class="sec-lbl">Видеообзор</div>
-      <h2 class="sec-title">Фотогалерея и видео ЧИЗ «Коянды»</h2>
-      <p class="sec-sub">Посмотрите на территорию индустриальной зоны, реализующиеся проекты и инфраструктуру.</p>
+      <div class="sec-lbl" data-i18n="sec.video">Видеообзор</div>
+      <h2 class="sec-title" data-i18n="video.title">Фотогалерея и видео ЧИЗ «Коянды»</h2>
+      <p class="sec-sub" data-i18n="video.sub">Посмотрите на территорию индустриальной зоны, реализующиеся проекты и инфраструктуру.</p>
     </div>
     <div class="vid-wrap fu fu-1">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="ЧИЗ Коянды" loading="lazy"></iframe>
+      <iframe src="https://www.youtube.com/embed/lpSXzYyvW-E?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="ЧИЗ Коянды" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     <div class="photo-row fu fu-2">
       <div class="ph"><img src="https://thb.tildacdn.pro/tild6132-6535-4630-b263-643931633564/-/resize/504x/petf-kombinat-i-indu.jpg" alt="ЧИЗ Коянды" loading="lazy"></div>
-      <div class="ph"><img src="https://images.unsplash.com/photo-1565793359-c79e02dc4b70?w=800&q=70" alt="Производство" loading="lazy"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=70" alt="Производство" loading="lazy"></div>
       <div class="ph"><img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=70" alt="Логистика" loading="lazy"></div>
     </div>
   </div>
 </section>
+
 
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
     <div class="about-grid">
       <div class="fu">
-        <div class="sec-lbl">О зоне</div>
-        <h2 class="sec-title">О Частной<br>Индустриальной зоне</h2>
-        <p class="sec-sub">ЧИЗ «Коянды» — специализированная площадка для размещения промышленных и логистических предприятий с полным пакетом инфраструктурных решений. Благодаря выгодному расположению рядом с Астаной и готовой инженерной инфраструктуре, зона позволяет быстро запустить производство и оптимизировать издержки.</p>
+        <div class="sec-lbl" data-i18n="sec.about">О зоне</div>
+        <h2 class="sec-title" data-i18n="about.title">О Частной<br>Индустриальной зоне</h2>
+        <p class="sec-sub" data-i18n="about.sub">ЧИЗ «Коянды» — специализированная площадка для размещения промышленных и логистических предприятий с полным пакетом инфраструктурных решений. Благодаря выгодному расположению рядом с Астаной и готовой инженерной инфраструктуре, зона позволяет быстро запустить производство и оптимизировать издержки.</p>
         <div class="stat-list">
+<<<<<<< HEAD
           <div class="stat-row">
             <div class="stat-n">200+</div>
             <div><div class="stat-info-l">Гектаров площади</div><div class="stat-info-d">Общая территория индустриальной зоны</div></div>
@@ -489,6 +563,11 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
             <div class="stat-n">2022</div>
             <div><div class="stat-info-l">Год основания</div><div class="stat-info-d">На основании Закона РК от 03.04.2022</div></div>
           </div>
+=======
+          <div class="stat-row"><div class="stat-n">200+</div><div><div class="stat-info-l" data-i18n="about.s1l">Гектаров площади</div><div class="stat-info-d" data-i18n="about.s1d">Общая территория индустриальной зоны</div></div></div>
+          <div class="stat-row"><div class="stat-n">3</div><div><div class="stat-info-l" data-i18n="about.s2l">Действующих резидента</div><div class="stat-info-d" data-i18n="about.s2d">Компании, реализующие стратегические проекты</div></div></div>
+          <div class="stat-row"><div class="stat-n">2019</div><div><div class="stat-info-l" data-i18n="about.s3l">Год основания</div><div class="stat-info-d" data-i18n="about.s3d">На основании Закона РК от 03.04.2019</div></div></div>
+>>>>>>> ab2497ee1735b690b376dd4e9d326ec170640f29
         </div>
       </div>
       <div class="about-img fu fu-2">
@@ -499,298 +578,295 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
   </div>
 </section>
 
+
 <!-- INFRA -->
 <section id="infra">
   <div class="wrap">
     <div class="fu">
-      <div class="sec-lbl">Инфраструктура</div>
-      <h2 class="sec-title">Готовая инфраструктура<br>для вашего производства</h2>
+      <div class="sec-lbl" data-i18n="sec.infra">Инфраструктура</div>
+      <h2 class="sec-title" data-i18n="infra.title">Готовая инфраструктура<br>для вашего производства</h2>
     </div>
     <div class="infra-grid">
-      <div class="card fu fu-1">
-        <div class="ic-ico">📍</div>
-        <div class="ic-t">Стратегическое расположение</div>
-        <p class="ic-d">Вдоль республиканской трассы Астана–Павлодар, отличная транспортная доступность. Ворота в центральноазиатские рынки.</p>
-      </div>
-      <div class="card fu fu-2">
-        <div class="ic-ico">⚡</div>
-        <div class="ic-t">Электроснабжение</div>
-        <p class="ic-d">Технические условия на подключение мощности от 6 до 25 МВАт. Стабильное и масштабируемое энергоснабжение.</p>
-      </div>
-      <div class="card fu fu-3">
-        <div class="ic-ico">💧</div>
-        <div class="ic-t">Водоснабжение</div>
-        <p class="ic-d">На территории пробурены две скважины с объёмом подачи 560 кубов в сутки каждая.</p>
-      </div>
-      <div class="card fu fu-1">
-        <div class="ic-ico">🔥</div>
-        <div class="ic-t">Газоснабжение (в перспективе)</div>
-        <p class="ic-d">Планируется подведение газовой инфраструктуры до конца 2025 года.</p>
-      </div>
-      <div class="card fu fu-2">
-        <div class="ic-ico">🚧</div>
-        <div class="ic-t">Подъездная дорога</div>
-        <p class="ic-d">Организован и засыпан щебнем подъездной путь к объекту, обеспечивающий надёжный круглогодичный доступ для тяжёлой техники.</p>
-      </div>
+      <div class="card fu fu-1"><div class="ic-ico">📍</div><div class="ic-t" data-i18n="infra.1t">Стратегическое расположение</div><p class="ic-d" data-i18n="infra.1d">Вдоль республиканской трассы Астана–Павлодар, отличная транспортная доступность. Ворота в центральноазиатские рынки.</p></div>
+      <div class="card fu fu-2"><div class="ic-ico">⚡</div><div class="ic-t" data-i18n="infra.2t">Электроснабжение</div><p class="ic-d" data-i18n="infra.2d">Технические условия на подключение мощности от 6 до 25 МВАт. Стабильное и масштабируемое энергоснабжение.</p></div>
+      <div class="card fu fu-3"><div class="ic-ico">💧</div><div class="ic-t" data-i18n="infra.3t">Водоснабжение</div><p class="ic-d" data-i18n="infra.3d">На территории пробурены две скважины с объёмом подачи 560 кубов в сутки каждая.</p></div>
+      <div class="card fu fu-1"><div class="ic-ico">🔥</div><div class="ic-t" data-i18n="infra.4t">Газоснабжение (в перспективе)</div><p class="ic-d" data-i18n="infra.4d">Планируется подведение газовой инфраструктуры до конца 2025 года.</p></div>
+      <div class="card fu fu-2"><div class="ic-ico">🚧</div><div class="ic-t" data-i18n="infra.5t">Подъездная дорога</div><p class="ic-d" data-i18n="infra.5d">Организован и засыпан щебнем подъездной путь к объекту, обеспечивающий надёжный круглогодичный доступ для тяжёлой техники.</p></div>
     </div>
   </div>
 </section>
+
 
 <!-- PREFERENCES -->
 <section id="preferences">
   <div class="wrap">
     <div class="pref-hd fu">
-      <div class="sec-lbl">Преференции</div>
-      <h2 class="sec-title">Раскройте потенциал<br>своего бизнеса</h2>
-      <p class="sec-sub">Используйте налоговые льготы, упрощённые таможенные процедуры и доступ к квалифицированным кадрам.</p>
+      <div class="sec-lbl" data-i18n="sec.pref">Преференции</div>
+      <h2 class="sec-title" data-i18n="pref.title">Раскройте потенциал<br>своего бизнеса</h2>
+      <p class="sec-sub" data-i18n="pref.sub">Используйте налоговые льготы, упрощённые таможенные процедуры и доступ к квалифицированным кадрам.</p>
     </div>
     <div class="pref-grid">
       <div class="card fu fu-1">
-        <div class="pc-badge">💰 Налоговые льготы</div>
-        <div class="pc-t">Максимальные преференции</div>
-        <p class="pc-d">Значительные налоговые преференции для повышения рентабельности и ускорения развития бизнеса.</p>
+        <div class="pc-badge">💰 <span data-i18n="pref.1badge">Налоговые льготы</span></div>
+        <div class="pc-t" data-i18n="pref.1t">Максимальные преференции</div>
+        <p class="pc-d" data-i18n="pref.1d">Значительные налоговые преференции для повышения рентабельности и ускорения развития бизнеса.</p>
         <table class="tax-table">
-          <tr><td>КПН</td><td>20% → <strong style="color:var(--gold)">0%</strong></td></tr>
-          <tr><td>НДС</td><td>12% → <strong style="color:var(--gold)">0%</strong></td></tr>
-          <tr><td>Налог на имущество</td><td>1,5% → <strong style="color:var(--gold)">0%</strong></td></tr>
-          <tr><td>Таможенные пошлины</td><td>до 30% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td data-i18n="tax.cit">КПН</td><td>20% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td data-i18n="tax.vat">НДС</td><td>12% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td data-i18n="tax.prop">Налог на имущество</td><td>1,5% → <strong style="color:var(--gold)">0%</strong></td></tr>
+          <tr><td data-i18n="tax.cust">Таможенные пошлины</td><td>до 30% → <strong style="color:var(--gold)">0%</strong></td></tr>
         </table>
       </div>
       <div class="card fu fu-2">
-        <div class="pc-badge">🏗️ Инфраструктурная помощь</div>
-        <div class="pc-t">Полное сопровождение</div>
-        <p class="pc-d">Полное сопровождение проектов: от подключения коммуникаций до поддержки в проектировании и строительстве. Управляющая компания помогает согласовать все технические условия и обеспечивает быстрый запуск объекта.</p>
+        <div class="pc-badge">🏗️ <span data-i18n="pref.2badge">Инфраструктурная помощь</span></div>
+        <div class="pc-t" data-i18n="pref.2t">Полное сопровождение</div>
+        <p class="pc-d" data-i18n="pref.2d">Полное сопровождение проектов: от подключения коммуникаций до поддержки в проектировании и строительстве. Управляющая компания помогает согласовать все технические условия и обеспечивает быстрый запуск объекта.</p>
       </div>
       <div class="card fu fu-3">
-        <div class="pc-badge">📋 Административная поддержка</div>
-        <div class="pc-t">Без бюрократических барьеров</div>
-        <p class="pc-d">Консультации и помощь при регистрации бизнеса, получении разрешений и лицензий. Упрощённое взаимодействие с государственными органами через управляющую компанию.</p>
+        <div class="pc-badge">📋 <span data-i18n="pref.3badge">Административная поддержка</span></div>
+        <div class="pc-t" data-i18n="pref.3t">Без бюрократических барьеров</div>
+        <p class="pc-d" data-i18n="pref.3d">Консультации и помощь при регистрации бизнеса, получении разрешений и лицензий. Упрощённое взаимодействие с государственными органами через управляющую компанию.</p>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- RESIDENTS -->
 <section id="residents">
   <div class="wrap">
     <div class="res-hd fu">
-      <div class="sec-lbl">Резиденты</div>
-      <h2 class="sec-title">Резиденты ЧИЗ «Коянды»</h2>
-      <p class="sec-sub">Компании, реализующие стратегически важные проекты на территории индустриальной зоны.</p>
+      <div class="sec-lbl" data-i18n="sec.residents">Резиденты</div>
+      <h2 class="sec-title" data-i18n="res.title">Резиденты ЧИЗ «Коянды»</h2>
+      <p class="sec-sub" data-i18n="res.sub">Компании, реализующие стратегически важные проекты на территории индустриальной зоны.</p>
     </div>
     <div class="res-grid">
       <div class="card fu fu-1">
-        <div class="res-tag">Агропром · Молочная продукция</div>
+        <div class="res-tag" data-i18n="res.1tag">Агропром · Молочная продукция</div>
         <div class="res-name">ТОО «ИНИПП AGRO HOLDING BAYAN»</div>
-        <p class="res-desc">Строительство комплекса по производству эко-молочных лечебно-профилактических продуктов питания, обогащённых пектином, инулином и витаминами для недропользователей.</p>
-        <a href="https://invest.gov.kz/doing-business-here/invest-projects/25485/" target="_blank" rel="noopener" class="res-link">Подробнее →</a>
+        <p class="res-desc" data-i18n="res.1d">Строительство комплекса по производству эко-молочных лечебно-профилактических продуктов питания, обогащённых пектином, инулином и витаминами для недропользователей.</p>
+        <a href="https://invest.gov.kz/doing-business-here/invest-projects/25485/" target="_blank" rel="noopener" class="res-link" data-i18n="res.more">Подробнее →</a>
       </div>
       <div class="card fu fu-2">
-        <div class="res-tag">Экоупаковка · Логистика</div>
+        <div class="res-tag" data-i18n="res.2tag">Экоупаковка · Логистика</div>
         <div class="res-name">ТОО «JV ECOLEAN SERVICE»</div>
-        <p class="res-desc">Специализируется на поставках и реэкспорте инновационной экологически чистой упаковки для жидких пищевых продуктов. Экологичная упаковка / Логистика / Реэкспорт.</p>
-        <span class="res-link" style="cursor:default">Резидент зоны</span>
+        <p class="res-desc" data-i18n="res.2d">Специализируется на поставках и реэкспорте инновационной экологически чистой упаковки для жидких пищевых продуктов. Экологичная упаковка / Логистика / Реэкспорт.</p>
+        <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="res-link" data-i18n="res.more">Подробнее →</a>
       </div>
       <div class="card fu fu-3">
-        <div class="res-tag">Комбикорма · Животноводство</div>
+        <div class="res-tag" data-i18n="res.3tag">Комбикорма · Животноводство</div>
         <div class="res-name">ТОО AGRO COMBINAT KZ</div>
-        <p class="res-desc">Производство экологически чистых комбикормов для крупного рогатого скота, мелкого рогатого скота, лошадей, птиц и диких животных.</p>
-        <a href="https://cloud.mail.ru/public/z8XE/KY9HTg5o4" target="_blank" rel="noopener" class="res-link">Подробнее →</a>
+        <p class="res-desc" data-i18n="res.3d">Производство экологически чистых комбикормов для крупного рогатого скота, мелкого рогатого скота, лошадей, птиц и диких животных.</p>
+        <a href="https://cloud.mail.ru/public/z8XE/KY9HTg5o4" target="_blank" rel="noopener" class="res-link" data-i18n="res.more">Подробнее →</a>
       </div>
       <div class="cta-block fu fu-4">
-        <h3>Здесь может быть ваш проект</h3>
-        <p>Станьте частью индустриального роста Казахстана. ЧИЗ «Коянды» предоставляет инфраструктуру, льготы и полное сопровождение от идеи до запуска производства.</p>
-        <button class="btn-p" onclick="openModal('modalForm')">Оставить заявку</button>
+        <h3 data-i18n="res.ctaTitle">Здесь может быть ваш проект</h3>
+        <p data-i18n="res.ctaSub">Станьте частью индустриального роста Казахстана. ЧИЗ «Коянды» предоставляет инфраструктуру, льготы и полное сопровождение от идеи до запуска производства.</p>
+        <button class="btn-p" onclick="openModal('modalForm')" data-i18n="cta.apply">Оставить заявку</button>
       </div>
     </div>
   </div>
 </section>
 
+
 <!-- SERVICES -->
 <section id="services">
   <div class="wrap">
     <div class="srv-hd fu">
-      <div class="sec-lbl">Услуги</div>
-      <h2 class="sec-title">Наша комплексная поддержка</h2>
-      <p class="sec-sub">Управляющая компания предоставляет широкий спектр услуг для комфортного инвестиционного процесса.</p>
+      <div class="sec-lbl" data-i18n="sec.services">Услуги</div>
+      <h2 class="sec-title" data-i18n="srv.title">Наша комплексная поддержка</h2>
+      <p class="sec-sub" data-i18n="srv.sub">Управляющая компания предоставляет широкий спектр услуг для комфортного инвестиционного процесса.</p>
     </div>
     <div class="srv-grid">
-      <div class="card fu fu-1">
-        <div class="srv-ico">📊</div>
-        <div class="srv-t">Разработка бизнес-проектов</div>
-        <p class="srv-d">Консультации и разработка проектов в различных отраслях промышленности, включая машиностроение, пищевую и лёгкую промышленность. Полный цикл от идеи до ТЭО.</p>
-      </div>
-      <div class="card fu fu-2">
-        <div class="srv-ico">📄</div>
-        <div class="srv-t">Получение необходимых разрешений</div>
-        <p class="srv-d">Помощь в оформлении и получении всех необходимых документов и разрешений для запуска производства. Юридическое сопровождение на всех этапах.</p>
-      </div>
-      <div class="card fu fu-3">
-        <div class="srv-ico">🏢</div>
-        <div class="srv-t">Сопровождение строительства</div>
-        <p class="srv-d">Организация и контроль строительства объектов под ключ, включая подключение к инфраструктуре и соблюдение всех строительных норм Казахстана.</p>
-      </div>
+      <div class="card fu fu-1"><div class="srv-ico">📊</div><div class="srv-t" data-i18n="srv.1t">Разработка бизнес-проектов</div><p class="srv-d" data-i18n="srv.1d">Консультации и разработка проектов в различных отраслях промышленности, включая машиностроение, пищевую и лёгкую промышленность. Полный цикл от идеи до ТЭО.</p></div>
+      <div class="card fu fu-2"><div class="srv-ico">📄</div><div class="srv-t" data-i18n="srv.2t">Получение необходимых разрешений</div><p class="srv-d" data-i18n="srv.2d">Помощь в оформлении и получении всех необходимых документов и разрешений для запуска производства. Юридическое сопровождение на всех этапах.</p></div>
+      <div class="card fu fu-3"><div class="srv-ico">🏢</div><div class="srv-t" data-i18n="srv.3t">Сопровождение строительства</div><p class="srv-d" data-i18n="srv.3d">Организация и контроль строительства объектов под ключ, включая подключение к инфраструктуре и соблюдение всех строительных норм Казахстана.</p></div>
     </div>
   </div>
 </section>
+
 
 <!-- INVESTMENTS -->
 <section id="investments">
   <div class="wrap">
     <div class="inv-grid">
       <div class="fu">
-        <div class="sec-lbl">Инвестиции</div>
-        <h2 class="sec-title">Инвестиционные<br>возможности</h2>
-        <p class="sec-sub">Управляющая компания ЧИЗ «Коянды» не только предоставляет готовую инфраструктуру, но и активно содействует привлечению финансирования от международных банков развития — ЕБРР, АБР и других.</p>
+        <div class="sec-lbl" data-i18n="sec.invest">Инвестиции</div>
+        <h2 class="sec-title" data-i18n="inv.title">Инвестиционные<br>возможности</h2>
+        <p class="sec-sub" data-i18n="inv.sub">Управляющая компания ЧИЗ «Коянды» не только предоставляет готовую инфраструктуру, но и активно содействует привлечению финансирования от международных банков развития — ЕБРР, АБР и других.</p>
         <div class="inv-nums">
-          <div class="inv-num"><div class="n">$5–25 млн</div><div class="l">Объём финансируемых проектов</div></div>
-          <div class="inv-num"><div class="n">15–20%</div><div class="l">Минимальное собственное участие</div></div>
+          <div class="inv-num"><div class="n">$5–25 млн</div><div class="l" data-i18n="inv.n1">Объём финансируемых проектов</div></div>
+          <div class="inv-num"><div class="n">15–20%</div><div class="l" data-i18n="inv.n2">Минимальное собственное участие</div></div>
         </div>
         <div class="srv-icons">
-          <div class="si"><div class="e">🗺️</div><div class="l">Подбор участка</div></div>
-          <div class="si"><div class="e">📋</div><div class="l">Согласование ТУ</div></div>
-          <div class="si"><div class="e">⚖️</div><div class="l">Юр. сопровождение</div></div>
-          <div class="si"><div class="e">💰</div><div class="l">Финансирование</div></div>
-          <div class="si"><div class="e">🏗️</div><div class="l">Строительство</div></div>
-          <div class="si"><div class="e">🚀</div><div class="l">Запуск</div></div>
+          <div class="si"><div class="e">🗺️</div><div class="l" data-i18n="inv.i1">Подбор участка</div></div>
+          <div class="si"><div class="e">📋</div><div class="l" data-i18n="inv.i2">Согласование ТУ</div></div>
+          <div class="si"><div class="e">⚖️</div><div class="l" data-i18n="inv.i3">Юр. сопровождение</div></div>
+          <div class="si"><div class="e">💰</div><div class="l" data-i18n="inv.i4">Финансирование</div></div>
+          <div class="si"><div class="e">🏗️</div><div class="l" data-i18n="inv.i5">Строительство</div></div>
+          <div class="si"><div class="e">🚀</div><div class="l" data-i18n="inv.i6">Запуск</div></div>
         </div>
       </div>
       <div class="fu fu-2">
-        <div class="sec-lbl" style="margin-bottom:22px">Этапы запуска</div>
-        <h3 class="sec-title" style="font-size:1.55rem;margin-bottom:8px">Условия партнёрства<br>и этапы запуска</h3>
-        <p style="font-size:.82rem;color:var(--text2);margin-bottom:28px;line-height:1.75">Сопровождаем проект от идеи до запуска производства.</p>
+        <div class="sec-lbl" style="margin-bottom:22px" data-i18n="inv.stepsLbl">Этапы запуска</div>
+        <h3 class="sec-title" style="font-size:1.55rem;margin-bottom:8px" data-i18n="inv.stepsTitle">Условия партнёрства<br>и этапы запуска</h3>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:28px;line-height:1.75" data-i18n="inv.stepsSub">Сопровождаем проект от идеи до запуска производства.</p>
         <div class="steps">
-          <div class="step">
-            <div class="step-n">1</div>
-            <div><div class="step-time">1–2 месяца</div><div class="step-t">Первичная заявка и партнёрская модель</div><p class="step-d">Управляющая компания сотрудничает с проектодержателями на условиях долевого партнёрства (от 10 до 30%), предоставляя участок, инфраструктуру и административное сопровождение.</p></div>
-          </div>
-          <div class="step">
-            <div class="step-n">2</div>
-            <div><div class="step-time">3–6 месяцев</div><div class="step-t">Финансовые условия и подтверждение проекта</div><p class="step-d">После признания проекта соответствующим критериям, проектодержатель оплачивает 1% от стоимости проекта — административная экспертиза и резервирование участка.</p></div>
-          </div>
-          <div class="step">
-            <div class="step-n">3</div>
-            <div><div class="step-time">2–3 месяца</div><div class="step-t">Подписание соглашения и запуск проектных работ</div><p class="step-d">Подписание соглашения о размещении, юридическое оформление участка, подключение к коммуникациям и запуск проектно-строительных работ.</p></div>
-          </div>
+          <div class="step"><div class="step-n">1</div><div><div class="step-time" data-i18n="inv.st1time">1–2 месяца</div><div class="step-t" data-i18n="inv.st1t">Первичная заявка и партнёрская модель</div><p class="step-d" data-i18n="inv.st1d">Управляющая компания сотрудничает с проектодержателями на условиях долевого партнёрства (от 10 до 30%), предоставляя участок, инфраструктуру и административное сопровождение.</p></div></div>
+          <div class="step"><div class="step-n">2</div><div><div class="step-time" data-i18n="inv.st2time">3–6 месяцев</div><div class="step-t" data-i18n="inv.st2t">Финансовые условия и подтверждение проекта</div><p class="step-d" data-i18n="inv.st2d">После признания проекта соответствующим критериям, проектодержатель оплачивает 1% от стоимости проекта — административная экспертиза и резервирование участка.</p></div></div>
+          <div class="step"><div class="step-n">3</div><div><div class="step-time" data-i18n="inv.st3time">2–3 месяца</div><div class="step-t" data-i18n="inv.st3t">Подписание соглашения и запуск проектных работ</div><p class="step-d" data-i18n="inv.st3d">Подписание соглашения о размещении, юридическое оформление участка, подключение к коммуникациям и запуск проектно-строительных работ.</p></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- DIRECTIONS -->
 <section id="directions">
   <div class="wrap">
     <div class="dir-hd fu">
-      <div class="sec-lbl">Направления</div>
-      <h2 class="sec-title">Приоритетные направления<br>ЧИЗ «Коянды»</h2>
-      <p class="sec-sub">Поддерживаем инвестиционные проекты в ключевых отраслях для устойчивого роста Казахстана.</p>
+      <div class="sec-lbl" data-i18n="sec.dir">Направления</div>
+      <h2 class="sec-title" data-i18n="dir.title">Приоритетные направления<br>ЧИЗ «Коянды»</h2>
+      <p class="sec-sub" data-i18n="dir.sub">Поддерживаем инвестиционные проекты в ключевых отраслях для устойчивого роста Казахстана.</p>
     </div>
     <div class="dir-grid">
-      <div class="dir-card fu fu-1"><div class="dir-e">🌾</div><div class="dir-t">Сельское хозяйство и продовольственная безопасность</div><p class="dir-d">Агропромышленные комплексы, перерабатывающие производства.</p></div>
-      <div class="dir-card fu fu-2"><div class="dir-e">☀️</div><div class="dir-t">Альтернативная энергетика</div><p class="dir-d">Солнечная, ветровая и биогазовая энергетика.</p></div>
-      <div class="dir-card fu fu-3"><div class="dir-e">♻️</div><div class="dir-t">Переработка отходов</div><p class="dir-d">Сбор, сортировка и переработка промышленных и бытовых отходов.</p></div>
-      <div class="dir-card fu fu-4"><div class="dir-e">💊</div><div class="dir-t">Здравоохранение и фармацевтика</div><p class="dir-d">Фармацевтические производства и медицинские лаборатории.</p></div>
-      <div class="dir-card fu fu-1"><div class="dir-e">⚙️</div><div class="dir-t">Промышленное производство</div><p class="dir-d">Машиностроение, лёгкая промышленность, упаковка.</p></div>
-      <div class="dir-card fu fu-2"><div class="dir-e">✈️</div><div class="dir-t">Авиация</div><p class="dir-d">Производство компонентов, логистика в сфере авиации.</p></div>
-      <div class="dir-card fu fu-3"><div class="dir-e">🚚</div><div class="dir-t">Транспорт и логистика</div><p class="dir-d">Складские центры, мультимодальные платформы.</p></div>
-      <div class="dir-card fu fu-4"><div class="dir-e">🏙️</div><div class="dir-t">Градостроительство и инфраструктура</div><p class="dir-d">Комплексное развитие инженерной инфраструктуры.</p></div>
+      <div class="dir-card fu fu-1"><div class="dir-e">🌾</div><div class="dir-t" data-i18n="dir.1t">Сельское хозяйство и продовольственная безопасность</div><p class="dir-d" data-i18n="dir.1d">Агропромышленные комплексы, перерабатывающие производства.</p></div>
+      <div class="dir-card fu fu-2"><div class="dir-e">☀️</div><div class="dir-t" data-i18n="dir.2t">Альтернативная энергетика</div><p class="dir-d" data-i18n="dir.2d">Солнечная, ветровая и биогазовая энергетика.</p></div>
+      <div class="dir-card fu fu-3"><div class="dir-e">♻️</div><div class="dir-t" data-i18n="dir.3t">Переработка отходов</div><p class="dir-d" data-i18n="dir.3d">Сбор, сортировка и переработка промышленных и бытовых отходов.</p></div>
+      <div class="dir-card fu fu-4"><div class="dir-e">💊</div><div class="dir-t" data-i18n="dir.4t">Здравоохранение и фармацевтика</div><p class="dir-d" data-i18n="dir.4d">Фармацевтические производства и медицинские лаборатории.</p></div>
+      <div class="dir-card fu fu-1"><div class="dir-e">⚙️</div><div class="dir-t" data-i18n="dir.5t">Промышленное производство</div><p class="dir-d" data-i18n="dir.5d">Машиностроение, лёгкая промышленность, упаковка.</p></div>
+      <div class="dir-card fu fu-2"><div class="dir-e">✈️</div><div class="dir-t" data-i18n="dir.6t">Авиация</div><p class="dir-d" data-i18n="dir.6d">Производство компонентов, логистика в сфере авиации.</p></div>
+      <div class="dir-card fu fu-3"><div class="dir-e">🚚</div><div class="dir-t" data-i18n="dir.7t">Транспорт и логистика</div><p class="dir-d" data-i18n="dir.7d">Складские центры, мультимодальные платформы.</p></div>
+      <div class="dir-card fu fu-4"><div class="dir-e">🏙️</div><div class="dir-t" data-i18n="dir.8t">Градостроительство и инфраструктура</div><p class="dir-d" data-i18n="dir.8d">Комплексное развитие инженерной инфраструктуры.</p></div>
     </div>
   </div>
 </section>
+
 
 <!-- NEWS -->
 <section id="news">
   <div class="wrap">
     <div class="news-hd fu">
-      <div class="sec-lbl">Новости и СМИ</div>
-      <h2 class="sec-title">Новости и публикации в СМИ</h2>
-      <p class="sec-sub">Следите за развитием ЧИЗ «Коянды» через официальные анонсы и публикации в деловых изданиях.</p>
+      <div class="sec-lbl" data-i18n="sec.news">Новости и СМИ</div>
+      <h2 class="sec-title" data-i18n="news.title">Новости и публикации в СМИ</h2>
+      <p class="sec-sub" data-i18n="news.sub">Следите за развитием ЧИЗ «Коянды» через официальные анонсы и публикации в деловых изданиях.</p>
     </div>
     <div class="news-grid">
-      <div class="card news-card fu fu-1"><a href="https://forbes.kz/articles/investor-iz-emiratov-stroit-v-akmolinskoy-oblasti-molochnyy-zavod-e7df09"><div class="nd">24 июня 2025</div><div class="nt">Инвестор из Эмиратов строит в Акмолинской области молочный завод</div><div class="ns">Международное сотрудничество в рамках ЧИЗ «Коянды» расширяется.</div><div class="n-arr">Читать →</div></a></div>
-      <div class="card news-card fu fu-2"><div class="nd">8 мая 2025</div><div class="nt">Церемония закладки камня проекта Biolife Proprevit состоится 24 июня 2025 года</div><div class="ns">ТОО «ИНИИП AGROHOLDING BAYAN» запускает строительство молочного комплекса.</div><div class="n-arr">Читать →</div></div>
-      <div class="card news-card fu fu-3"><div class="nd">24 апреля 2025</div><div class="nt">Новый молочный проект с хорватским участием стартует в Казахстане</div><div class="ns">Азамат Панбаев встретился с послом Республики Хорватия.</div><div class="n-arr">Читать →</div></div>
-      <div class="card news-card fu fu-1"><div class="nd">24 апреля 2025</div><div class="nt">Молочный завод для горняков и шахтёров построят под Астаной</div><div class="ns">Новый проект для обеспечения питанием работников горнодобывающей отрасли.</div><div class="n-arr">Читать →</div></div>
-      <div class="card news-card fu fu-2"><div class="nd">11 февраля 2025</div><div class="nt">Министр транспорта встретился с Председателем совета директоров «Exim Finance»</div><div class="ns">Переговоры о финансировании крупных инфраструктурных проектов.</div><div class="n-arr">Читать →</div></div>
-      <div class="card news-card fu fu-3"><div class="nd">10 февраля 2025</div><div class="nt">Инвесторы обсудили перспективы развития индустриальной зоны «Коянды»</div><div class="ns">Стратегическая сессия с международными инвесторами и госорганами.</div><div class="n-arr">Читать →</div></div>
+      <div class="card news-card fu fu-1">
+        <a href="https://forbes.kz/articles/investor-iz-emiratov-stroit-v-akmolinskoy-oblasti-molochnyy-zavod-e7df09" target="_blank" rel="noopener" class="news-card-link">
+          <div class="nd">24 <span data-i18n="month.jun">июня</span> 2025</div>
+          <div class="nt" data-i18n="news.1t">Инвестор из Эмиратов строит в Акмолинской области молочный завод</div>
+          <div class="ns" data-i18n="news.1s">Международное сотрудничество в рамках ЧИЗ «Коянды» расширяется.</div>
+          <div class="n-arr" data-i18n="news.read">Читать →</div>
+        </a>
+      </div>
+      <div class="card news-card fu fu-2">
+        <div class="news-card-nolink">
+          <div class="nd">8 <span data-i18n="month.may">мая</span> 2025</div>
+          <div class="nt" data-i18n="news.2t">Церемония закладки камня проекта Biolife Proprevit состоится 24 июня 2025 года</div>
+          <div class="ns" data-i18n="news.2s">ТОО «ИНИИП AGROHOLDING BAYAN» запускает строительство молочного комплекса.</div>
+        </div>
+      </div>
+      <div class="card news-card fu fu-3">
+        <div class="news-card-nolink">
+          <div class="nd">24 <span data-i18n="month.apr">апреля</span> 2025</div>
+          <div class="nt" data-i18n="news.3t">Новый молочный проект с хорватским участием стартует в Казахстане</div>
+          <div class="ns" data-i18n="news.3s">Азамат Панбаев встретился с послом Республики Хорватия.</div>
+        </div>
+      </div>
+      <div class="card news-card fu fu-1">
+        <div class="news-card-nolink">
+          <div class="nd">24 <span data-i18n="month.apr">апреля</span> 2025</div>
+          <div class="nt" data-i18n="news.4t">Молочный завод для горняков и шахтёров построят под Астаной</div>
+          <div class="ns" data-i18n="news.4s">Новый проект для обеспечения питанием работников горнодобывающей отрасли.</div>
+        </div>
+      </div>
+      <div class="card news-card fu fu-2">
+        <div class="news-card-nolink">
+          <div class="nd">11 <span data-i18n="month.feb">февраля</span> 2025</div>
+          <div class="nt" data-i18n="news.5t">Министр транспорта встретился с Председателем совета директоров «Exim Finance»</div>
+          <div class="ns" data-i18n="news.5s">Переговоры о финансировании крупных инфраструктурных проектов.</div>
+        </div>
+      </div>
+      <div class="card news-card fu fu-3">
+        <div class="news-card-nolink">
+          <div class="nd">10 <span data-i18n="month.feb">февраля</span> 2025</div>
+          <div class="nt" data-i18n="news.6t">Инвесторы обсудили перспективы развития индустриальной зоны «Коянды»</div>
+          <div class="ns" data-i18n="news.6s">Стратегическая сессия с международными инвесторами и госорганами.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TEAM -->
+
+<!-- TEAM 
 <section id="team">
   <div class="wrap">
     <div class="team-hd fu">
-      <div class="sec-lbl">Команда</div>
-      <h2 class="sec-title">Команда ЧИЗ «Коянды»</h2>
-      <p class="sec-sub">Специалисты, обеспечивающие профессиональное сопровождение инвестиционных проектов.</p>
+      <div class="sec-lbl" data-i18n="sec.team">Команда</div>
+      <h2 class="sec-title" data-i18n="team.title">Команда ЧИЗ «Коянды»</h2>
+      <p class="sec-sub" data-i18n="team.sub">Специалисты, обеспечивающие профессиональное сопровождение инвестиционных проектов.</p>
     </div>
     <div class="team-grid">
-      <div class="card fu fu-1"><div class="tc-role">Руководство</div><div class="tc-name">Абай Искаков</div><div class="tc-title">Генеральный директор Управляющей компании ЧИЗ «Коянды»</div><p class="tc-desc">Отвечает за стратегическое развитие и общее руководство проектом. Благодаря его опыту и видению, ЧИЗ «Коянды» становится точкой притяжения для инвесторов.</p></div>
-      <div class="card fu fu-2"><div class="tc-role">Управление проектами</div><div class="tc-name">Дана Нургали</div><div class="tc-title">Куратор проектов · Директор по работе со строительными компаниями</div><p class="tc-desc">Сопровождает каждый строительный проект от чертежа до ввода в эксплуатацию. Координирует взаимодействие с подрядчиками.</p></div>
-      <div class="card fu fu-3"><div class="tc-role">Строительство</div><div class="tc-name">Алихан Мазиев</div><div class="tc-title">Генеральный подрядчик</div><p class="tc-desc">Более 30 лет опыта в строительной сфере. Отвечает за реализацию всех строительных работ: от организации площадки до финального контроля качества.</p></div>
+      <div class="card fu fu-1"><div class="tc-role" data-i18n="team.1role">Руководство</div><div class="tc-name">Абай Искаков</div><div class="tc-title" data-i18n="team.1title">Генеральный директор Управляющей компании ЧИЗ «Коянды»</div><p class="tc-desc" data-i18n="team.1d">Отвечает за стратегическое развитие и общее руководство проектом. Благодаря его опыту и видению, ЧИЗ «Коянды» становится точкой притяжения для инвесторов.</p></div>
+      <div class="card fu fu-2"><div class="tc-role" data-i18n="team.2role">Управление проектами</div><div class="tc-name">Дана Нургали</div><div class="tc-title" data-i18n="team.2title">Куратор проектов · Директор по работе со строительными компаниями</div><p class="tc-desc" data-i18n="team.2d">Сопровождает каждый строительный проект от чертежа до ввода в эксплуатацию. Координирует взаимодействие с подрядчиками.</p></div>
+      <div class="card fu fu-3"><div class="tc-role" data-i18n="team.3role">Строительство</div><div class="tc-name">Алихан Мазиев</div><div class="tc-title" data-i18n="team.3title">Генеральный подрядчик</div><p class="tc-desc" data-i18n="team.3d">Более 30 лет опыта в строительной сфере. Отвечает за реализацию всех строительных работ: от организации площадки до финального контроля качества.</p></div>
     </div>
   </div>
-</section>
+</section>-->
+
 
 <!-- PARTNERS -->
 <section id="partners">
   <div class="wrap">
     <div class="partners-hd fu">
-      <div class="sec-lbl">Партнёры</div>
-      <h2 class="sec-title">Наши партнёры</h2>
-      <p class="sec-sub">Сотрудничаем с ведущими компаниями для поддержки проектов на территории индустриальной зоны.</p>
+      <div class="sec-lbl" data-i18n="sec.partners">Партнёры</div>
+      <h2 class="sec-title" data-i18n="partners.title">Наши партнёры</h2>
+      <p class="sec-sub" data-i18n="partners.sub">Сотрудничаем с ведущими компаниями для поддержки проектов на территории индустриальной зоны.</p>
     </div>
   </div>
   <div class="track-wrap fu">
     <div class="track">
-      <a href="https://eximfinance.ae/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3165-3465-4732-a135-383061383862/-/empty/exim_finance_logo.webp" alt="Exim Finance" loading="lazy"></a>
-      <a href="https://sinitech.eu/en/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3563-6463-4330-b462-383366616263/-/empty/sinitech_industries_.jpeg" alt="Sinitech" loading="lazy"></a>
-      <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6237-3064-4434-b131-633735363034/-/empty/sp-7b014bcf696d5e520.png" alt="Ecolean" loading="lazy"></a>
-      <a href="https://www.anr-engineering.de/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6333-3235-4938-b633-306464316635/-/empty/image-911x759_2.png" alt="ANR Engineering" loading="lazy"></a>
-      <a href="https://www.hbor.hr/en" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3265-6331-4332-b263-343966623466/-/empty/croatia.jpg" alt="HBOR" loading="lazy"></a>
-      <a href="https://www.elofhansson.com/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6132-3434-4432-a335-346630333262/-/empty/elof_hansson_lumber_.webp" alt="Elof Hansson" loading="lazy"></a>
-      <a href="https://invest.gov.kz/ru/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6133-6334-4932-b938-646534663662/-/empty/ade0c0eb62f99675e935.png" alt="Invest.gov.kz" loading="lazy"></a>
-      <a href="https://www.antastransport.com/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6462-3734-4230-a164-373235613832/-/empty/_WhatsApp_2025-05-10.jpg" alt="Antas" loading="lazy"></a>
-      <a href="https://kan-kaz.org/main.php" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild3432-6537-4737-b065-643632353138/-/empty/image_3.png" alt="KAN" loading="lazy"></a>
-      <a href="https://agun.kz/" target="_blank" rel="noopener" class="p-logo"><img src="https://thb.tildacdn.pro/tild6330-3062-4062-b538-663639383834/-/empty/image_4.png" alt="AGUN" loading="lazy"></a>
+      <a href="https://eximfinance.ae/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner1.png" alt="Exim Finance" loading="lazy"></a>
+      <a href="https://sinitech.eu/en/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner2.png" alt="Sinitech" loading="lazy"></a>
+      <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner3.png" alt="Ecolean" loading="lazy"></a>
+      <a href="https://www.anr-engineering.de/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner4.png" alt="ANR Engineering" loading="lazy"></a>
+      <a href="https://www.hbor.hr/en" target="_blank" rel="noopener" class="p-logo"><img src="images/partner5.png" alt="HBOR" loading="lazy"></a>
+      <a href="https://www.elofhansson.com/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner6.png" alt="Elof Hansson" loading="lazy"></a>
+      <a href="https://invest.gov.kz/ru/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner7.png" alt="Invest.gov.kz" loading="lazy"></a>
+      <a href="https://www.antastransport.com/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner8.png" alt="Antas" loading="lazy"></a>
+      <a href="https://kan-kaz.org/main.php" target="_blank" rel="noopener" class="p-logo"><img src="images/partner9.png" alt="KAN" loading="lazy"></a>
+      <a href="https://agun.kz/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner10.png" alt="AGUN" loading="lazy"></a>
       <!-- duplicate for loop -->
-      <a href="https://eximfinance.ae/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3165-3465-4732-a135-383061383862/-/empty/exim_finance_logo.webp" alt="" loading="lazy"></a>
-      <a href="https://sinitech.eu/en/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3563-6463-4330-b462-383366616263/-/empty/sinitech_industries_.jpeg" alt="" loading="lazy"></a>
-      <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6237-3064-4434-b131-633735363034/-/empty/sp-7b014bcf696d5e520.png" alt="" loading="lazy"></a>
-      <a href="https://www.anr-engineering.de/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6333-3235-4938-b633-306464316635/-/empty/image-911x759_2.png" alt="" loading="lazy"></a>
-      <a href="https://www.hbor.hr/en" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3265-6331-4332-b263-343966623466/-/empty/croatia.jpg" alt="" loading="lazy"></a>
-      <a href="https://www.elofhansson.com/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6132-3434-4432-a335-346630333262/-/empty/elof_hansson_lumber_.webp" alt="" loading="lazy"></a>
-      <a href="https://invest.gov.kz/ru/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6133-6334-4932-b938-646534663662/-/empty/ade0c0eb62f99675e935.png" alt="" loading="lazy"></a>
-      <a href="https://www.antastransport.com/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6462-3734-4230-a164-373235613832/-/empty/_WhatsApp_2025-05-10.jpg" alt="" loading="lazy"></a>
-      <a href="https://kan-kaz.org/main.php" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild3432-6537-4737-b065-643632353138/-/empty/image_3.png" alt="" loading="lazy"></a>
-      <a href="https://agun.kz/" target="_blank" rel="noopener" class="p-logo" aria-hidden="true"><img src="https://thb.tildacdn.pro/tild6330-3062-4062-b538-663639383834/-/empty/image_4.png" alt="" loading="lazy"></a>
+      <a href="https://eximfinance.ae/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner1.png" alt="Exim Finance" loading="lazy"></a>
+      <a href="https://sinitech.eu/en/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner2.png" alt="Sinitech" loading="lazy"></a>
+      <a href="https://www.ecolean.com/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner3.png" alt="Ecolean" loading="lazy"></a>
+      <a href="https://www.anr-engineering.de/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner4.png" alt="ANR Engineering" loading="lazy"></a>
+      <a href="https://www.hbor.hr/en" target="_blank" rel="noopener" class="p-logo"><img src="images/partner5.png" alt="HBOR" loading="lazy"></a>
+      <a href="https://www.elofhansson.com/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner6.png" alt="Elof Hansson" loading="lazy"></a>
+      <a href="https://invest.gov.kz/ru/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner7.png" alt="Invest.gov.kz" loading="lazy"></a>
+      <a href="https://www.antastransport.com/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner8.png" alt="Antas" loading="lazy"></a>
+      <a href="https://kan-kaz.org/main.php" target="_blank" rel="noopener" class="p-logo"><img src="images/partner9.png" alt="KAN" loading="lazy"></a>
+      <a href="https://agun.kz/" target="_blank" rel="noopener" class="p-logo"><img src="images/partner10.png" alt="AGUN" loading="lazy"></a>
     </div>
   </div>
 </section>
+
 
 <!-- CONTACTS -->
 <section id="contacts">
   <div class="wrap">
     <div class="con-grid">
       <div class="fu">
-        <div class="sec-lbl">Контакты</div>
-        <h2 class="sec-title">Свяжитесь<br>с нами</h2>
-        <p class="sec-sub" style="margin-bottom:38px">Мы предоставляем помощь и консультации по вопросам инвестиций и развития бизнеса в регионе.</p>
+        <div class="sec-lbl" data-i18n="sec.contacts">Контакты</div>
+        <h2 class="sec-title" data-i18n="con.title">Свяжитесь<br>с нами</h2>
+        <p class="sec-sub" style="margin-bottom:38px" data-i18n="con.sub">Мы предоставляем помощь и консультации по вопросам инвестиций и развития бизнеса в регионе.</p>
         <div class="con-info">
-          <div class="con-item">
-            <div class="con-ico">📞</div>
-            <div><div class="cl">Телефон</div><a href="tel:+77055531751" class="cv">+7 705 553 17 51</a></div>
-          </div>
-          <div class="con-item">
-            <div class="con-ico">📧</div>
-            <div><div class="cl">Email</div><a href="mailto:info@chizkoyandy.kz" class="cv">info@chizkoyandy.kz</a></div>
-          </div>
-          <div class="con-item">
-            <div class="con-ico">📍</div>
-            <div><div class="cl">Адрес</div><span class="cv">Частная Индустриальная зона «Коянды», Акмолинская область</span></div>
-          </div>
+          <div class="con-item"><div class="con-ico">📞</div><div><div class="cl" data-i18n="con.phone">Телефон</div><a href="tel:+77055531751" class="cv">+7 705 553 17 51</a></div></div>
+          <div class="con-item"><div class="con-ico">📧</div><div><div class="cl">Email</div><a href="mailto:info@chizkoyandy.kz" class="cv">info@chizkoyandy.kz</a></div></div>
+          <div class="con-item"><div class="con-ico">📍</div><div><div class="cl" data-i18n="con.addr">Адрес</div><span class="cv" data-i18n="con.addrVal">Частная Индустриальная зона «Коянды», Акмолинская область</span></div></div>
         </div>
         <div class="socials">
           <a href="https://wa.me/77055531751" target="_blank" rel="noopener" class="soc-btn">
@@ -802,36 +878,34 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
             Instagram
           </a>
         </div>
-        <div class="con-note" style="margin-top:22px">Создана на основании Закона РК от 03.04.2019 года «О специальных экономических и индустриальных зонах в Республике Казахстан»</div>
+        <div class="con-note" data-i18n="con.note" style="margin-top:22px">Создана на основании Закона РК от 03.04.2019 года «О специальных экономических и индустриальных зонах в Республике Казахстан»</div>
       </div>
       <div class="form-box fu fu-2">
-        <div class="form-t">Отправить запрос</div>
-        <div class="form-sub">Оставьте заявку — наша команда свяжется с вами в течение рабочего дня.</div>
+        <div class="form-t" data-i18n="form.title">Отправить запрос</div>
+        <div class="form-sub" data-i18n="form.sub">Оставьте заявку — наша команда свяжется с вами в течение рабочего дня.</div>
         <form id="contactForm" novalidate>
           <div class="f-row">
-            <div class="fg"><label for="c_name">Имя *</label><input type="text" id="c_name" placeholder="Ваше имя" required></div>
-            <div class="fg"><label for="c_company">Компания</label><input type="text" id="c_company" placeholder="Название компании"></div>
+            <div class="fg"><label for="c_name" data-i18n="form.name">Имя *</label><input type="text" id="c_name" placeholder="Ваше имя" required></div>
+            <div class="fg"><label for="c_company" data-i18n="form.company">Компания</label><input type="text" id="c_company" placeholder="Название компании"></div>
           </div>
-          <div class="f-row">
-            <div class="fg"><label for="c_phone">Телефон *</label><input type="tel" id="c_phone" placeholder="+7 ___" required></div>
-            <div class="fg"><label for="c_email">Email *</label><input type="email" id="c_email" placeholder="email@company.com" required></div>
-          </div>
+          <div class="fg"><label for="c_phone" data-i18n="form.phone">Телефон *</label><input type="tel" id="c_phone" placeholder="+7 ___" required></div>
           <div class="fg">
-            <label for="c_industry">Отрасль</label>
+            <label for="c_industry" data-i18n="form.industry">Отрасль</label>
             <select id="c_industry">
-              <option value="">Выберите отрасль</option>
+              <option value="" data-i18n="form.selectIndustry">Выберите отрасль</option>
               <option>Сельское хозяйство</option><option>Энергетика</option><option>Переработка отходов</option>
               <option>Фармацевтика</option><option>Промышленность</option><option>Авиация</option>
               <option>Логистика</option><option>Другое</option>
             </select>
           </div>
-          <div class="fg"><label for="c_msg">Сообщение</label><textarea id="c_msg" placeholder="Опишите ваш проект или вопрос..."></textarea></div>
-          <button type="submit" class="btn-submit">Отправить запрос</button>
+          <div class="fg"><label for="c_msg" data-i18n="form.msg">Сообщение</label><textarea id="c_msg" placeholder="Опишите ваш проект или вопрос..."></textarea></div>
+          <button type="submit" class="btn-submit" data-i18n="form.submit">Отправить запрос</button>
         </form>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- FOOTER -->
 <footer>
@@ -839,91 +913,90 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
     <div class="foot-inner">
       <div>
         <div class="foot-logo">ЧИЗ <em>«Коянды»</em></div>
-        <p class="foot-desc">Частная Индустриальная зона «Коянды» — специализированная площадка для промышленных и логистических предприятий рядом с Астаной, Казахстан.</p>
+        <p class="foot-desc" data-i18n="footer.desc">Частная Индустриальная зона «Коянды» — специализированная площадка для промышленных и логистических предприятий рядом с Астаной, Казахстан.</p>
         <div class="socials">
           <a href="https://wa.me/77055531751" target="_blank" rel="noopener" class="soc-btn" style="font-size:.72rem;padding:8px 13px">WhatsApp</a>
           <a href="https://www.instagram.com/koyandyzone/" target="_blank" rel="noopener" class="soc-btn" style="font-size:.72rem;padding:8px 13px">Instagram</a>
         </div>
       </div>
       <div>
-        <div class="foot-col-t">Навигация</div>
+        <div class="foot-col-t" data-i18n="footer.nav">Навигация</div>
         <div class="foot-links">
-          <a href="#about">О зоне</a><a href="#infra">Инфраструктура</a>
-          <a href="#preferences">Преференции</a><a href="#residents">Резиденты</a>
-          <a href="#services">Услуги</a>
+          <a href="#about" data-i18n="nav.about">О зоне</a><a href="#infra" data-i18n="nav.infra">Инфраструктура</a>
+          <a href="#preferences" data-i18n="nav.pref">Преференции</a><a href="#residents" data-i18n="sec.residents">Резиденты</a>
+          <a href="#services" data-i18n="nav.services">Услуги</a>
         </div>
       </div>
       <div>
-        <div class="foot-col-t">Компания</div>
+        <div class="foot-col-t" data-i18n="footer.company">Компания</div>
         <div class="foot-links">
-          <a href="#investments">Инвестиции</a><a href="#directions">Направления</a>
-          <a href="#news">Новости</a><a href="#team">Команда</a>
-          <a href="#contacts">Контакты</a>
+          <a href="#investments" data-i18n="nav.invest">Инвестиции</a><a href="#directions" data-i18n="sec.dir">Направления</a>
+          <a href="#news" data-i18n="nav.news">Новости</a><a href="#team" data-i18n="sec.team">Команда</a>
+          <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
         </div>
       </div>
       <div>
-        <div class="foot-col-t">Правовая информация</div>
+        <div class="foot-col-t" data-i18n="footer.legal">Правовая информация</div>
         <div class="foot-links">
-          <button class="foot-link-btn" onclick="openModal('modalPrivacy')">Политика конфиденциальности</button>
-          <button class="foot-link-btn" onclick="openModal('modalTerms')">Пользовательское соглашение</button>
-          <button class="foot-link-btn" onclick="openModal('modalCookie')">Cookie-политика</button>
+          <button class="foot-link-btn" onclick="openModal('modalPrivacy')" data-i18n="legal.privacy">Политика конфиденциальности</button>
+          <button class="foot-link-btn" onclick="openModal('modalTerms')" data-i18n="legal.terms">Пользовательское соглашение</button>
+          <button class="foot-link-btn" onclick="openModal('modalCookie')" data-i18n="legal.cookie">Cookie-политика</button>
         </div>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© ЧИЗ «Коянды», 2024. Все права защищены.</span>
-      <span>Закон РК от 03.04.2019 «О специальных экономических и индустриальных зонах»</span>
+      <span data-i18n="footer.copy">© ЧИЗ «Коянды», 2024. Все права защищены.</span>
+      <span data-i18n="footer.law">Закон РК от 03.04.2019 «О специальных экономических и индустриальных зонах»</span>
     </div>
   </div>
 </footer>
 
+
 <!-- FLOATING CTA -->
-<button class="float-btn" style="position:fixed;bottom:26px;right:26px;z-index:900" onclick="openModal('modalForm')">💬 Оставить заявку</button>
-
-<!-- SCROLL TOP -->
+<button class="float-btn" onclick="openModal('modalForm')">💬 <span data-i18n="cta.apply">Оставить заявку</span></button>
 <button class="scroll-top" id="scrollTop" title="Наверх">↑</button>
-
-<!-- TOASTS -->
 <div class="toast-wrap" id="toastWrap"></div>
+
 
 <!-- COOKIE BANNER -->
 <div class="cookie" id="cookie">
-  <p class="cookie-txt">Мы используем файлы cookie для улучшения работы сайта. <button onclick="openModal('modalCookie')">Политика cookie</button>.</p>
-  <button class="cookie-acc" id="cookieAcc">Принять</button>
+  <p class="cookie-txt"><span data-i18n="cookie.txt">Мы используем файлы cookie для улучшения работы сайта.</span> <button onclick="openModal('modalCookie')" data-i18n="legal.cookie">Политика cookie</button>.</p>
+  <button class="cookie-acc" id="cookieAcc" data-i18n="cookie.accept">Принять</button>
 </div>
+
 
 <!-- MODAL: FORM -->
 <div class="modal-ov" id="modalForm">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal('modalForm')">✕</button>
-    <div class="modal-t">Оставить заявку</div>
-    <div class="modal-s">Заполните форму — наша команда свяжется с вами в течение рабочего дня.</div>
+    <div class="modal-t" data-i18n="cta.apply">Оставить заявку</div>
+    <div class="modal-s" data-i18n="modal.formSub">Заполните форму — наша команда свяжется с вами в течение рабочего дня.</div>
     <form id="popupForm" novalidate>
-      <div class="fg"><label for="p_name">Имя *</label><input type="text" id="p_name" placeholder="Ваше имя" required></div>
-      <div class="fg"><label for="p_phone">Телефон *</label><input type="tel" id="p_phone" placeholder="+7 ___" required></div>
-      <div class="fg"><label for="p_email">Email *</label><input type="email" id="p_email" placeholder="email@company.com" required></div>
+      <div class="fg"><label for="p_name" data-i18n="form.name">Имя *</label><input type="text" id="p_name" placeholder="Ваше имя" required></div>
+      <div class="fg"><label for="p_phone" data-i18n="form.phone">Телефон *</label><input type="tel" id="p_phone" placeholder="+7 ___" required></div>
       <div class="fg">
-        <label for="p_ind">Отрасль</label>
+        <label for="p_ind" data-i18n="form.industry">Отрасль</label>
         <select id="p_ind">
-          <option value="">Выберите отрасль</option>
+          <option value="" data-i18n="form.selectIndustry">Выберите отрасль</option>
           <option>Сельское хозяйство</option><option>Энергетика</option><option>Переработка отходов</option>
           <option>Фармацевтика</option><option>Промышленность</option><option>Авиация</option>
           <option>Логистика</option><option>Другое</option>
         </select>
       </div>
-      <button type="submit" class="btn-submit">Отправить</button>
+      <button type="submit" class="btn-submit" data-i18n="form.submit">Отправить</button>
     </form>
   </div>
 </div>
+
 
 <!-- MODAL: PRIVACY -->
 <div class="modal-ov" id="modalPrivacy">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal('modalPrivacy')">✕</button>
-    <div class="modal-t">Политика конфиденциальности</div>
+    <div class="modal-t" data-i18n="legal.privacy">Политика конфиденциальности</div>
     <div class="modal-body">
       <h3>1. Общие положения</h3><p>Настоящая политика конфиденциальности определяет порядок обработки персональных данных пользователей сайта ЧИЗ «Коянды».</p>
-      <h3>2. Сбор данных</h3><p>Мы собираем имя, контактный телефон, email, название компании и отрасль — исключительно при добровольном заполнении форм обратной связи.</p>
+      <h3>2. Сбор данных</h3><p>Мы собираем имя, контактный телефон, название компании и отрасль — исключительно при добровольном заполнении форм обратной связи.</p>
       <h3>3. Использование данных</h3><p>Данные используются для обработки запросов и консультаций по инвестиционным возможностям. Не передаются третьим лицам без согласия.</p>
       <h3>4. Защита данных</h3><p>Мы принимаем технические и организационные меры для защиты ваших персональных данных.</p>
       <h3>5. Контакты</h3><p>По вопросам обработки данных: info@chizkoyandy.kz</p>
@@ -931,11 +1004,12 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
   </div>
 </div>
 
+
 <!-- MODAL: TERMS -->
 <div class="modal-ov" id="modalTerms">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal('modalTerms')">✕</button>
-    <div class="modal-t">Пользовательское соглашение</div>
+    <div class="modal-t" data-i18n="legal.terms">Пользовательское соглашение</div>
     <div class="modal-body">
       <h3>1. Принятие условий</h3><p>Используя сайт ЧИЗ «Коянды», вы соглашаетесь с условиями настоящего соглашения.</p>
       <h3>2. Использование сайта</h3><p>Сайт предназначен для предоставления информации об инвестиционных возможностях. Запрещается использование в незаконных целях.</p>
@@ -945,11 +1019,12 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
   </div>
 </div>
 
+
 <!-- MODAL: COOKIE -->
 <div class="modal-ov" id="modalCookie">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal('modalCookie')">✕</button>
-    <div class="modal-t">Cookie-политика</div>
+    <div class="modal-t" data-i18n="legal.cookie">Cookie-политика</div>
     <div class="modal-body">
       <h3>Что такое cookie?</h3><p>Cookie — небольшие текстовые файлы, сохраняемые на вашем устройстве при посещении сайта.</p>
       <h3>Какие cookie мы используем?</h3>
@@ -961,46 +1036,411 @@ footer{border-top:1px solid var(--border);padding:56px 0 36px;position:relative;
   </div>
 </div>
 
+
 <script>
-// NAV SCROLL
+/* ═══════════════ TRANSLATIONS ═══════════════ */
+const i18n = {
+  ru: {
+    'nav.about':'О зоне','nav.infra':'Инфраструктура','nav.pref':'Преференции',
+    'nav.services':'Услуги','nav.invest':'Инвестиции','nav.news':'Новости','nav.contacts':'Контакты',
+    'cta.apply':'Оставить заявку','cta.learn':'Узнать больше',
+    'hero.badge':'Казахстан · Акмолинская область · Астана',
+    'hero.title':'Частная Индустриальная<br>зона <span class="g">«Коянды»</span>',
+    'hero.sub':'Ваш бизнес — наша территория развития. Готовая инфраструктура, налоговые льготы и полное сопровождение от идеи до запуска производства.',
+    'stat.ha':'Га территории','stat.res':'Резидента','stat.year':'Год основания','stat.tax':'Налог КПН',
+    'sec.video':'Видеообзор','video.title':'Фотогалерея и видео ЧИЗ «Коянды»','video.sub':'Посмотрите на территорию индустриальной зоны, реализующиеся проекты и инфраструктуру.',
+    'sec.about':'О зоне','about.title':'О Частной<br>Индустриальной зоне',
+    'about.sub':'ЧИЗ «Коянды» — специализированная площадка для размещения промышленных и логистических предприятий с полным пакетом инфраструктурных решений.',
+    'about.s1l':'Гектаров площади','about.s1d':'Общая территория индустриальной зоны',
+    'about.s2l':'Действующих резидента','about.s2d':'Компании, реализующие стратегические проекты',
+    'about.s3l':'Год основания','about.s3d':'На основании Закона РК от 03.04.2019',
+    'sec.infra':'Инфраструктура','infra.title':'Готовая инфраструктура<br>для вашего производства',
+    'infra.1t':'Стратегическое расположение','infra.1d':'Вдоль республиканской трассы Астана–Павлодар, отличная транспортная доступность.',
+    'infra.2t':'Электроснабжение','infra.2d':'Технические условия на подключение мощности от 6 до 25 МВАт.',
+    'infra.3t':'Водоснабжение','infra.3d':'На территории пробурены две скважины с объёмом подачи 560 кубов в сутки каждая.',
+    'infra.4t':'Газоснабжение (в перспективе)','infra.4d':'Планируется подведение газовой инфраструктуры до конца 2025 года.',
+    'infra.5t':'Подъездная дорога','infra.5d':'Организован и засыпан щебнем подъездной путь к объекту, обеспечивающий надёжный круглогодичный доступ для тяжёлой техники.',
+    'sec.pref':'Преференции','pref.title':'Раскройте потенциал<br>своего бизнеса','pref.sub':'Используйте налоговые льготы, упрощённые таможенные процедуры и доступ к квалифицированным кадрам.',
+    'pref.1badge':'Налоговые льготы','pref.1t':'Максимальные преференции','pref.1d':'Значительные налоговые преференции для повышения рентабельности и ускорения развития бизнеса.',
+    'pref.2badge':'Инфраструктурная помощь','pref.2t':'Полное сопровождение','pref.2d':'Полное сопровождение проектов: от подключения коммуникаций до поддержки в проектировании и строительстве.',
+    'pref.3badge':'Административная поддержка','pref.3t':'Без бюрократических барьеров','pref.3d':'Консультации и помощь при регистрации бизнеса, получении разрешений и лицензий.',
+    'tax.cit':'КПН','tax.vat':'НДС','tax.prop':'Налог на имущество','tax.cust':'Таможенные пошлины',
+    'sec.residents':'Резиденты','res.title':'Резиденты ЧИЗ «Коянды»','res.sub':'Компании, реализующие стратегически важные проекты на территории индустриальной зоны.',
+    'res.1tag':'Агропром · Молочная продукция','res.1d':'Строительство комплекса по производству эко-молочных лечебно-профилактических продуктов питания, обогащённых пектином, инулином и витаминами.',
+    'res.2tag':'Экоупаковка · Логистика','res.2d':'Специализируется на поставках и реэкспорте инновационной экологически чистой упаковки для жидких пищевых продуктов.',
+    'res.3tag':'Комбикорма · Животноводство','res.3d':'Производство экологически чистых комбикормов для крупного рогатого скота, мелкого рогатого скота, лошадей, птиц и диких животных.',
+    'res.more':'Подробнее →','res.ctaTitle':'Здесь может быть ваш проект',
+    'res.ctaSub':'Станьте частью индустриального роста Казахстана. ЧИЗ «Коянды» предоставляет инфраструктуру, льготы и полное сопровождение от идеи до запуска производства.',
+    'sec.services':'Услуги','srv.title':'Наша комплексная поддержка','srv.sub':'Управляющая компания предоставляет широкий спектр услуг для комфортного инвестиционного процесса.',
+    'srv.1t':'Разработка бизнес-проектов','srv.1d':'Консультации и разработка проектов в различных отраслях промышленности.',
+    'srv.2t':'Получение необходимых разрешений','srv.2d':'Помощь в оформлении и получении всех необходимых документов и разрешений для запуска производства.',
+    'srv.3t':'Сопровождение строительства','srv.3d':'Организация и контроль строительства объектов под ключ, включая подключение к инфраструктуре.',
+    'sec.invest':'Инвестиции','inv.title':'Инвестиционные<br>возможности','inv.sub':'Управляющая компания ЧИЗ «Коянды» не только предоставляет готовую инфраструктуру, но и активно содействует привлечению финансирования от международных банков развития.',
+    'inv.n1':'Объём финансируемых проектов','inv.n2':'Минимальное собственное участие',
+    'inv.i1':'Подбор участка','inv.i2':'Согласование ТУ','inv.i3':'Юр. сопровождение','inv.i4':'Финансирование','inv.i5':'Строительство','inv.i6':'Запуск',
+    'inv.stepsLbl':'Этапы запуска','inv.stepsTitle':'Условия партнёрства<br>и этапы запуска','inv.stepsSub':'Сопровождаем проект от идеи до запуска производства.',
+    'inv.st1time':'1–2 месяца','inv.st1t':'Первичная заявка и партнёрская модель','inv.st1d':'Управляющая компания сотрудничает с проектодержателями на условиях долевого партнёрства (от 10 до 30%).',
+    'inv.st2time':'3–6 месяцев','inv.st2t':'Финансовые условия и подтверждение проекта','inv.st2d':'После признания проекта соответствующим критериям, проектодержатель оплачивает 1% от стоимости проекта.',
+    'inv.st3time':'2–3 месяца','inv.st3t':'Подписание соглашения и запуск проектных работ','inv.st3d':'Подписание соглашения о размещении, юридическое оформление участка, подключение к коммуникациям.',
+    'sec.dir':'Направления','dir.title':'Приоритетные направления<br>ЧИЗ «Коянды»','dir.sub':'Поддерживаем инвестиционные проекты в ключевых отраслях для устойчивого роста Казахстана.',
+    'dir.1t':'Сельское хозяйство и продовольственная безопасность','dir.1d':'Агропромышленные комплексы, перерабатывающие производства.',
+    'dir.2t':'Альтернативная энергетика','dir.2d':'Солнечная, ветровая и биогазовая энергетика.',
+    'dir.3t':'Переработка отходов','dir.3d':'Сбор, сортировка и переработка промышленных и бытовых отходов.',
+    'dir.4t':'Здравоохранение и фармацевтика','dir.4d':'Фармацевтические производства и медицинские лаборатории.',
+    'dir.5t':'Промышленное производство','dir.5d':'Машиностроение, лёгкая промышленность, упаковка.',
+    'dir.6t':'Авиация','dir.6d':'Производство компонентов, логистика в сфере авиации.',
+    'dir.7t':'Транспорт и логистика','dir.7d':'Складские центры, мультимодальные платформы.',
+    'dir.8t':'Градостроительство и инфраструктура','dir.8d':'Комплексное развитие инженерной инфраструктуры.',
+    'sec.news':'Новости и СМИ','news.title':'Новости и публикации в СМИ','news.sub':'Следите за развитием ЧИЗ «Коянды» через официальные анонсы и публикации в деловых изданиях.',
+    'month.jun':'июня','month.may':'мая','month.apr':'апреля','month.feb':'февраля',
+    'news.1t':'Инвестор из Эмиратов строит в Акмолинской области молочный завод','news.1s':'Международное сотрудничество в рамках ЧИЗ «Коянды» расширяется.',
+    'news.2t':'Церемония закладки камня проекта Biolife Proprevit состоится 24 июня 2025 года','news.2s':'ТОО «ИНИИП AGROHOLDING BAYAN» запускает строительство молочного комплекса.',
+    'news.3t':'Новый молочный проект с хорватским участием стартует в Казахстане','news.3s':'Азамат Панбаев встретился с послом Республики Хорватия.',
+    'news.4t':'Молочный завод для горняков и шахтёров построят под Астаной','news.4s':'Новый проект для обеспечения питанием работников горнодобывающей отрасли.',
+    'news.5t':'Министр транспорта встретился с Председателем совета директоров «Exim Finance»','news.5s':'Переговоры о финансировании крупных инфраструктурных проектов.',
+    'news.6t':'Инвесторы обсудили перспективы развития индустриальной зоны «Коянды»','news.6s':'Стратегическая сессия с международными инвесторами и госорганами.',
+    'news.read':'Читать →',
+    'sec.team':'Команда','team.title':'Команда ЧИЗ «Коянды»','team.sub':'Специалисты, обеспечивающие профессиональное сопровождение инвестиционных проектов.',
+    'team.1role':'Руководство','team.1title':'Генеральный директор Управляющей компании ЧИЗ «Коянды»','team.1d':'Отвечает за стратегическое развитие и общее руководство проектом.',
+    'team.2role':'Управление проектами','team.2title':'Куратор проектов · Директор по работе со строительными компаниями','team.2d':'Сопровождает каждый строительный проект от чертежа до ввода в эксплуатацию.',
+    'team.3role':'Строительство','team.3title':'Генеральный подрядчик','team.3d':'Более 30 лет опыта в строительной сфере. Отвечает за реализацию всех строительных работ.',
+    'sec.partners':'Партнёры','partners.title':'Наши партнёры','partners.sub':'Сотрудничаем с ведущими компаниями для поддержки проектов на территории индустриальной зоны.',
+    'sec.contacts':'Контакты','con.title':'Свяжитесь<br>с нами','con.sub':'Мы предоставляем помощь и консультации по вопросам инвестиций и развития бизнеса в регионе.',
+    'con.phone':'Телефон','con.addr':'Адрес','con.addrVal':'Частная Индустриальная зона «Коянды», Акмолинская область',
+    'con.note':'Создана на основании Закона РК от 03.04.2019 года «О специальных экономических и индустриальных зонах в Республике Казахстан»',
+    'form.title':'Отправить запрос','form.sub':'Оставьте заявку — наша команда свяжется с вами в течение рабочего дня.',
+    'form.name':'Имя *','form.company':'Компания','form.phone':'Телефон *','form.industry':'Отрасль','form.selectIndustry':'Выберите отрасль','form.msg':'Сообщение','form.submit':'Отправить запрос','form.other':'Другое',
+    'modal.formSub':'Заполните форму — наша команда свяжется с вами в течение рабочего дня.',
+    'footer.desc':'Частная Индустриальная зона «Коянды» — специализированная площадка для промышленных и логистических предприятий рядом с Астаной, Казахстан.',
+    'footer.nav':'Навигация','footer.company':'Компания','footer.legal':'Правовая информация',
+    'footer.copy':'© ЧИЗ «Коянды», 2024. Все права защищены.',
+    'footer.law':'Закон РК от 03.04.2019 «О специальных экономических и индустриальных зонах»',
+    'legal.privacy':'Политика конфиденциальности','legal.terms':'Пользовательское соглашение','legal.cookie':'Cookie-политика',
+    'cookie.txt':'Мы используем файлы cookie для улучшения работы сайта.','cookie.accept':'Принять',
+    'toast.success':'Запрос успешно отправлен! Свяжемся с вами в течение рабочего дня.','toast.popup':'Заявка отправлена! Свяжемся с вами в ближайшее время.','toast.error':'Пожалуйста, заполните все обязательные поля.',
+  },
+  kz: {
+    'nav.about':'Аймақ туралы','nav.infra':'Инфрақұрылым','nav.pref':'Артықшылықтар',
+    'nav.services':'Қызметтер','nav.invest':'Инвестициялар','nav.news':'Жаңалықтар','nav.contacts':'Байланыс',
+    'cta.apply':'Өтінім қалдыру','cta.learn':'Толығырақ',
+    'hero.badge':'Қазақстан · Ақмола облысы · Астана',
+    'hero.title':'Жеке Индустриалды<br>аймақ <span class="g">«Қоянды»</span>',
+    'hero.sub':'Сіздің бизнесіңіз — біздің даму аймағымыз. Дайын инфрақұрылым, салық жеңілдіктері және идеядан өндіріске дейін толық сүйемелдеу.',
+    'stat.ha':'Га аумақ','stat.res':'Резидент','stat.year':'Негізделген жыл','stat.tax':'КТС салығы',
+    'sec.video':'Бейне шолу','video.title':'ЖИА «Қоянды» фотогалереясы мен бейнесі','video.sub':'Индустриалды аймақ аумағын, жүзеге асырылып жатқан жобалар мен инфрақұрылымды қараңыз.',
+    'sec.about':'Аймақ туралы','about.title':'Жеке Индустриалды<br>аймақ туралы',
+    'about.sub':'ЖИА «Қоянды» — өнеркәсіптік және логистикалық кәсіпорындарды орналастыруға арналған мамандандырылған алаң. Астана қаласына жақын орналасуы мен дайын инженерлік инфрақұрылым өндірісті тез іске қосуға мүмкіндік береді.',
+    'about.s1l':'Гектар аумақ','about.s1d':'Индустриалды аймақтың жалпы аумағы',
+    'about.s2l':'Қолданыстағы резидент','about.s2d':'Стратегиялық жобаларды іске асырушы компаниялар',
+    'about.s3l':'Негізделген жыл','about.s3d':'ҚР 03.04.2019 Заңы негізінде',
+    'sec.infra':'Инфрақұрылым','infra.title':'Өндірісіңіз үшін<br>дайын инфрақұрылым',
+    'infra.1t':'Стратегиялық орналасу','infra.1d':'Астана–Павлодар республикалық тас жолы бойында, тамаша көлік қолжетімділігі.',
+    'infra.2t':'Электрмен жабдықтау','infra.2d':'6-дан 25 МВА-ге дейін қуат қосуға техникалық шарттар.',
+    'infra.3t':'Сумен жабдықтау','infra.3d':'Аумақта тәулігіне 560 текшеметр берімділігі бар екі ұңғыма бұрғыланған.',
+    'infra.4t':'Газбен жабдықтау (болашақта)','infra.4d':'2025 жылдың соңына дейін газ инфрақұрылымын тарту жоспарланып отыр.',
+    'infra.5t':'Кіреберіс жол','infra.5d':'Объектіге ауыр техника үшін сенімді жыл бойы қолжетімділікті қамтамасыз ететін кіреберіс жол ұйымдастырылып, қиыршықтаспен жабылған.',
+    'sec.pref':'Артықшылықтар','pref.title':'Бизнесіңіздің<br>әлеуетін ашыңыз','pref.sub':'Салық жеңілдіктерін, жеңілдетілген кедендік рәсімдерді және білікті кадрларға қолжетімділікті пайдаланыңыз.',
+    'pref.1badge':'Салық жеңілдіктері','pref.1t':'Максималды артықшылықтар','pref.1d':'Рентабельділікті арттыру және бизнесті дамытуды жеделдету үшін маңызды салық жеңілдіктері.',
+    'pref.2badge':'Инфрақұрылымдық көмек','pref.2t':'Толық сүйемелдеу','pref.2d':'Жобаларды толық сүйемелдеу: байланыстарды қосудан бастап жобалау мен құрылысты қолдауға дейін.',
+    'pref.3badge':'Әкімшілік қолдау','pref.3t':'Бюрократиялық кедергісіз','pref.3d':'Бизнесті тіркеу, рұқсаттар мен лицензиялар алу кезінде кеңес пен көмек.',
+    'tax.cit':'КТС','tax.vat':'ҚҚС','tax.prop':'Мүлік салығы','tax.cust':'Кедендік баждар',
+    'sec.residents':'Резиденттер','res.title':'ЖИА «Қоянды» резиденттері','res.sub':'Индустриалды аймақ аумағында стратегиялық маңызды жобаларды іске асырушы компаниялар.',
+    'res.1tag':'Агроөнеркәсіп · Сүт өнімдері','res.1d':'Пектин, инулин және витаминдермен байытылған эко-сүт емдік-профилактикалық тағам өнімдерін өндіру кешенін салу.',
+    'res.2tag':'Экоорама · Логистика','res.2d':'Сұйық азық-түлік өнімдеріне арналған инновациялық экологиялық таза орама жеткізу мен реэкспортқа мамандандырылған.',
+    'res.3tag':'Жемшөп · Мал шаруашылығы','res.3d':'Ірі қара мал, ұсақ мал, жылқы, құс пен жабайы жануарларға арналған экологиялық таза жемшөп өндіру.',
+    'res.more':'Толығырақ →','res.ctaTitle':'Мұнда сіздің жобаңыз болуы мүмкін',
+    'res.ctaSub':'Қазақстанның индустриалды өсуінің бір бөлігі болыңыз. ЖИА «Қоянды» инфрақұрылымды, жеңілдіктерді және идеядан өндіріске дейін толық сүйемелдеуді ұсынады.',
+    'sec.services':'Қызметтер','srv.title':'Кешенді қолдауымыз','srv.sub':'Басқарушы компания ыңғайлы инвестициялық процесс үшін кең ауқымды қызметтер ұсынады.',
+    'srv.1t':'Бизнес-жобаларды әзірлеу','srv.1d':'Машина жасау, тамақ пен жеңіл өнеркәсіп салаларында жобаларды кеңес беру және әзірлеу.',
+    'srv.2t':'Қажетті рұқсаттарды алу','srv.2d':'Өндірісті іске қосуға арналған барлық қажетті құжаттар мен рұқсаттарды рәсімдеу.',
+    'srv.3t':'Құрылысты сүйемелдеу','srv.3d':'Инфрақұрылымға қосу мен барлық Қазақстан құрылыс нормаларын сақтай отырып, объектілерді «кілт тапсыру» негізінде салуды ұйымдастыру.',
+    'sec.invest':'Инвестициялар','inv.title':'Инвестициялық<br>мүмкіндіктер','inv.sub':'ЖИА «Қоянды» басқарушы компаниясы дайын инфрақұрылымды ұсынып қана қоймай, халықаралық даму банктерінен қаражат тартуға белсенді жәрдемдеседі.',
+    'inv.n1':'Қаржыландырылатын жобалар көлемі','inv.n2':'Минималды меншікті қатысу',
+    'inv.i1':'Учаскені таңдау','inv.i2':'ТШ келісу','inv.i3':'Заң. сүйемелдеу','inv.i4':'Қаржыландыру','inv.i5':'Құрылыс','inv.i6':'Іске қосу',
+    'inv.stepsLbl':'Іске қосу кезеңдері','inv.stepsTitle':'Әріптестік шарттары<br>мен іске қосу кезеңдері','inv.stepsSub':'Жобаны идеядан өндіріске дейін сүйемелдейміз.',
+    'inv.st1time':'1–2 ай','inv.st1t':'Алғашқы өтінім және серіктестік моделі','inv.st1d':'Басқарушы компания жобаиелерімен үлестік серіктестік шарттарында (10-дан 30%-ға дейін) ынтымақтасады.',
+    'inv.st2time':'3–6 ай','inv.st2t':'Қаржылық шарттар және жобаны растау','inv.st2d':'Жоба критерийлерге сай деп танылғаннан кейін жобаиесі жоба құнының 1%-ын төлейді.',
+    'inv.st3time':'2–3 ай','inv.st3t':'Келісімге қол қою және жобалық жұмыстарды іске қосу','inv.st3d':'Орналасу туралы келісімге қол қою, учаскені заңдық рәсімдеу, коммуникацияларға қосу.',
+    'sec.dir':'Бағыттар','dir.title':'ЖИА «Қоянды» басым<br>бағыттары','dir.sub':'Қазақстанның орнықты өсуі үшін негізгі салалардағы инвестициялық жобаларды қолдаймыз.',
+    'dir.1t':'Ауыл шаруашылығы және азық-түлік қауіпсіздігі','dir.1d':'Агроөнеркәсіптік кешендер, өңдеу өндірістері.',
+    'dir.2t':'Балама энергетика','dir.2d':'Күн, жел және биогаз энергетикасы.',
+    'dir.3t':'Қалдықтарды қайта өңдеу','dir.3d':'Өнеркәсіптік және тұрмыстық қалдықтарды жинау, сұрыптау және қайта өңдеу.',
+    'dir.4t':'Денсаулық сақтау және фармацевтика','dir.4d':'Фармацевтикалық өндірістер мен медициналық зертханалар.',
+    'dir.5t':'Өнеркәсіптік өндіріс','dir.5d':'Машина жасау, жеңіл өнеркәсіп, орама.',
+    'dir.6t':'Авиация','dir.6d':'Компоненттер өндіру, авиация саласындағы логистика.',
+    'dir.7t':'Көлік және логистика','dir.7d':'Қойма орталықтары, мультимодалды платформалар.',
+    'dir.8t':'Қала құрылысы және инфрақұрылым','dir.8d':'Инженерлік инфрақұрылымды кешенді дамыту.',
+    'sec.news':'Жаңалықтар мен БАҚ','news.title':'Жаңалықтар мен БАҚ жарияланымдары','news.sub':'ЖИА «Қоянды» дамуын ресми хабарландырулар мен іскери басылымдар арқылы қадағалаңыз.',
+    'month.jun':'маусым','month.may':'мамыр','month.apr':'сәуір','month.feb':'ақпан',
+    'news.1t':'Эмираттардың инвесторы Ақмола облысында сүт зауытын салуда','news.1s':'ЖИА «Қоянды» аясындағы халықаралық ынтымақтастық кеңеюде.',
+    'news.2t':'Biolife Proprevit жобасының іргетасын қалау рәсімі 2025 жылдың 24 маусымында өтеді','news.2s':'«ИНИИП AGROHOLDING BAYAN» ЖШС сүт кешенінің құрылысын бастайды.',
+    'news.3t':'Хорваттың қатысуымен жаңа сүт жобасы Қазақстанда іске қосылады','news.3s':'Азамат Панбаев Хорватия Республикасының елшісімен кездесті.',
+    'news.4t':'Астананың маңында тау-кен жұмысшылары үшін сүт зауыты салынады','news.4s':'Тау-кен саласы жұмысшыларын тамақтандыруды қамтамасыз ету үшін жаңа жоба.',
+    'news.5t':'Көлік министрі «Exim Finance» директорлар кеңесінің төрағасымен кездесті','news.5s':'Ірі инфрақұрылымдық жобаларды қаржыландыру туралы келіссөздер.',
+    'news.6t':'Инвесторлар «Қоянды» индустриалды аймағының даму перспективаларын талқылады','news.6s':'Халықаралық инвесторлар мен мемлекеттік органдармен стратегиялық сессия.',
+    'news.read':'Оқу →',
+    'sec.team':'Команда','team.title':'ЖИА «Қоянды» командасы','team.sub':'Инвестициялық жобаларды кәсіби сүйемелдеуді қамтамасыз ететін мамандар.',
+    'team.1role':'Басшылық','team.1title':'ЖИА «Қоянды» Басқарушы компаниясының Бас директоры','team.1d':'Жобаның стратегиялық дамуы мен жалпы басшылығына жауапты.',
+    'team.2role':'Жобаларды басқару','team.2title':'Жобалар кураторы · Құрылыс компанияларымен жұмыс директоры','team.2d':'Әрбір құрылыс жобасын сызбадан пайдалануға тапсыруға дейін сүйемелдейді.',
+    'team.3role':'Құрылыс','team.3title':'Бас мердігер','team.3d':'Құрылыс саласында 30 жылдан астам тәжірибе. Барлық құрылыс жұмыстарын іске асыруға жауапты.',
+    'sec.partners':'Серіктестер','partners.title':'Біздің серіктестеріміз','partners.sub':'Индустриалды аймақ аумағындағы жобаларды қолдау үшін жетекші компаниялармен ынтымақтасамыз.',
+    'sec.contacts':'Байланыс','con.title':'Бізбен<br>байланысыңыз','con.sub':'Аймақта инвестиция мен бизнесті дамыту мәселелері бойынша көмек пен кеңес береміз.',
+    'con.phone':'Телефон','con.addr':'Мекенжай','con.addrVal':'«Қоянды» Жеке Индустриалды аймағы, Ақмола облысы',
+    'con.note':'ҚР «Арнайы экономикалық және индустриалды аймақтар туралы» 03.04.2019 Заңы негізінде құрылған',
+    'form.title':'Сұрау жіберу','form.sub':'Өтінім қалдырыңыз — командамыз жұмыс күні ішінде сізбен байланысады.',
+    'form.name':'Аты *','form.company':'Компания','form.phone':'Телефон *','form.industry':'Сала','form.selectIndustry':'Саланы таңдаңыз','form.msg':'Хабарлама','form.submit':'Сұрау жіберу','form.other':'Басқа',
+    'modal.formSub':'Нысанды толтырыңыз — командамыз жұмыс күні ішінде сізбен байланысады.',
+    'footer.desc':'«Қоянды» ЖИА — Қазақстан, Астана маңындағы өнеркәсіптік және логистикалық кәсіпорындарға арналған мамандандырылған алаң.',
+    'footer.nav':'Навигация','footer.company':'Компания','footer.legal':'Құқықтық ақпарат',
+    'footer.copy':'© ЖИА «Қоянды», 2024. Барлық құқықтар қорғалған.',
+    'footer.law':'ҚР 03.04.2019 «Арнайы экономикалық және индустриалды аймақтар туралы» Заңы',
+    'legal.privacy':'Құпиялылық саясаты','legal.terms':'Пайдаланушы келісімі','legal.cookie':'Cookie-саясат',
+    'cookie.txt':'Сайттың жұмысын жақсарту үшін cookie файлдарын пайдаланамыз.','cookie.accept':'Қабылдау',
+    'toast.success':'Сұрау сәтті жіберілді! Жұмыс күні ішінде сізбен байланысамыз.','toast.popup':'Өтінім жіберілді! Жақын арада байланысамыз.','toast.error':'Барлық міндетті өрістерді толтырыңыз.',
+  },
+  en: {
+    'nav.about':'About','nav.infra':'Infrastructure','nav.pref':'Benefits',
+    'nav.services':'Services','nav.invest':'Investments','nav.news':'News','nav.contacts':'Contacts',
+    'cta.apply':'Submit Application','cta.learn':'Learn More',
+    'hero.badge':'Kazakhstan · Akmola Region · Astana',
+    'hero.title':'Private Industrial<br>Zone <span class="g">«Koyandı»</span>',
+    'hero.sub':'Your business — our development territory. Ready infrastructure, tax incentives and full support from idea to production launch.',
+    'stat.ha':'Ha Territory','stat.res':'Residents','stat.year':'Founded','stat.tax':'CIT Tax',
+    'sec.video':'Video Overview','video.title':'PIZ «Koyandı» Photo Gallery & Video','video.sub':'View the industrial zone territory, ongoing projects and infrastructure.',
+    'sec.about':'About','about.title':'About the Private<br>Industrial Zone',
+    'about.sub':'PIZ «Koyandı» is a specialized platform for industrial and logistics enterprises with a full infrastructure package. Thanks to its advantageous location near Astana and ready engineering infrastructure, the zone allows quick production launch and cost optimization.',
+    'about.s1l':'Hectares of land','about.s1d':'Total territory of the industrial zone',
+    'about.s2l':'Active residents','about.s2d':'Companies implementing strategic projects',
+    'about.s3l':'Founded','about.s3d':'Based on the Law of Kazakhstan dated 03.04.2019',
+    'sec.infra':'Infrastructure','infra.title':'Ready Infrastructure<br>for Your Production',
+    'infra.1t':'Strategic Location','infra.1d':'Along the Astana–Pavlodar national highway, excellent transport accessibility.',
+    'infra.2t':'Power Supply','infra.2d':'Technical conditions for connection from 6 to 25 MVA.',
+    'infra.3t':'Water Supply','infra.3d':'Two wells drilled on the territory with a supply volume of 560 cubic meters per day each.',
+    'infra.4t':'Gas Supply (planned)','infra.4d':'Gas infrastructure is planned to be connected by the end of 2025.',
+    'infra.5t':'Access Road','infra.5d':'An access road to the facility has been organized and covered with gravel, providing reliable year-round access for heavy equipment.',
+    'sec.pref':'Benefits','pref.title':'Unlock Your Business<br>Potential','pref.sub':'Take advantage of tax incentives, simplified customs procedures and access to qualified personnel.',
+    'pref.1badge':'Tax Incentives','pref.1t':'Maximum Preferences','pref.1d':'Significant tax preferences to improve profitability and accelerate business development.',
+    'pref.2badge':'Infrastructure Support','pref.2t':'Full Support','pref.2d':'Complete project support: from utility connections to design and construction assistance.',
+    'pref.3badge':'Administrative Support','pref.3t':'No Bureaucratic Barriers','pref.3d':'Consultations and assistance with business registration, obtaining permits and licenses.',
+    'tax.cit':'CIT','tax.vat':'VAT','tax.prop':'Property Tax','tax.cust':'Customs Duties',
+    'sec.residents':'Residents','res.title':'PIZ «Koyandı» Residents','res.sub':'Companies implementing strategically important projects on the industrial zone territory.',
+    'res.1tag':'Agro-industry · Dairy Products','res.1d':'Construction of a complex for producing eco-dairy medicinal-preventive food products enriched with pectin, inulin and vitamins.',
+    'res.2tag':'Eco-packaging · Logistics','res.2d':'Specializes in supply and re-export of innovative eco-friendly packaging for liquid food products.',
+    'res.3tag':'Feed · Livestock','res.3d':'Production of organic feed for cattle, small livestock, horses, poultry and wild animals.',
+    'res.more':'Learn More →','res.ctaTitle':'Your Project Could Be Here',
+    'res.ctaSub':'Become part of Kazakhstan\'s industrial growth. PIZ «Koyandı» provides infrastructure, incentives and full support from idea to production launch.',
+    'sec.services':'Services','srv.title':'Our Comprehensive Support','srv.sub':'The management company provides a wide range of services for a comfortable investment process.',
+    'srv.1t':'Business Project Development','srv.1d':'Consultations and project development across various industries.',
+    'srv.2t':'Obtaining Required Permits','srv.2d':'Assistance in preparing and obtaining all necessary documents and permits for production launch.',
+    'srv.3t':'Construction Support','srv.3d':'Organization and control of turnkey construction, including utility connections.',
+    'sec.invest':'Investments','inv.title':'Investment<br>Opportunities','inv.sub':'PIZ «Koyandı» management company not only provides ready infrastructure but also facilitates financing from international development banks.',
+    'inv.n1':'Financed Project Volume','inv.n2':'Minimum Own Participation',
+    'inv.i1':'Site Selection','inv.i2':'TU Approval','inv.i3':'Legal Support','inv.i4':'Financing','inv.i5':'Construction','inv.i6':'Launch',
+    'inv.stepsLbl':'Launch Stages','inv.stepsTitle':'Partnership Terms<br>& Launch Stages','inv.stepsSub':'We accompany the project from idea to production launch.',
+    'inv.st1time':'1–2 months','inv.st1t':'Initial Application & Partnership Model','inv.st1d':'The management company cooperates with project holders on equity partnership terms (10 to 30%).',
+    'inv.st2time':'3–6 months','inv.st2t':'Financial Terms & Project Confirmation','inv.st2d':'Once the project meets the criteria, the project holder pays 1% of the project cost.',
+    'inv.st3time':'2–3 months','inv.st3t':'Agreement Signing & Project Works Launch','inv.st3d':'Signing of placement agreement, legal land registration, utility connections and launch of design and construction works.',
+    'sec.dir':'Directions','dir.title':'Priority Directions<br>of PIZ «Koyandı»','dir.sub':'We support investment projects in key sectors for sustainable growth of Kazakhstan.',
+    'dir.1t':'Agriculture & Food Security','dir.1d':'Agro-industrial complexes, processing facilities.',
+    'dir.2t':'Alternative Energy','dir.2d':'Solar, wind and biogas energy.',
+    'dir.3t':'Waste Processing','dir.3d':'Collection, sorting and recycling of industrial and household waste.',
+    'dir.4t':'Healthcare & Pharmaceuticals','dir.4d':'Pharmaceutical production and medical laboratories.',
+    'dir.5t':'Industrial Production','dir.5d':'Mechanical engineering, light industry, packaging.',
+    'dir.6t':'Aviation','dir.6d':'Component manufacturing, aviation logistics.',
+    'dir.7t':'Transport & Logistics','dir.7d':'Warehouse centers, multimodal platforms.',
+    'dir.8t':'Urban Development & Infrastructure','dir.8d':'Comprehensive engineering infrastructure development.',
+    'sec.news':'News & Media','news.title':'News & Media Publications','news.sub':'Follow PIZ «Koyandı» development through official announcements and business media publications.',
+    'month.jun':'June','month.may':'May','month.apr':'April','month.feb':'February',
+    'news.1t':'UAE Investor Builds Dairy Plant in Akmola Region','news.1s':'International cooperation within PIZ «Koyandı» is expanding.',
+    'news.2t':'Biolife Proprevit Foundation Stone Ceremony to Take Place on June 24, 2025','news.2s':'«INIIP AGROHOLDING BAYAN» LLP launches dairy complex construction.',
+    'news.3t':'New Dairy Project with Croatian Participation Starts in Kazakhstan','news.3s':'Azamat Panbaev met with the Ambassador of the Republic of Croatia.',
+    'news.4t':'Dairy Plant for Miners to Be Built near Astana','news.4s':'New project to provide nutrition for mining industry workers.',
+    'news.5t':'Transport Minister Met with Chairman of «Exim Finance» Board','news.5s':'Negotiations on financing major infrastructure projects.',
+    'news.6t':'Investors Discussed Development Prospects of «Koyandı» Industrial Zone','news.6s':'Strategic session with international investors and government agencies.',
+    'news.read':'Read →',
+    'sec.team':'Team','team.title':'PIZ «Koyandı» Team','team.sub':'Specialists providing professional support for investment projects.',
+    'team.1role':'Management','team.1title':'CEO of PIZ «Koyandı» Management Company','team.1d':'Responsible for strategic development and overall project management.',
+    'team.2role':'Project Management','team.2title':'Project Curator · Director of Construction Company Relations','team.2d':'Accompanies each construction project from blueprint to commissioning.',
+    'team.3role':'Construction','team.3title':'General Contractor','team.3d':'Over 30 years of experience in construction. Responsible for all construction works.',
+    'sec.partners':'Partners','partners.title':'Our Partners','partners.sub':'We cooperate with leading companies to support projects on the industrial zone territory.',
+    'sec.contacts':'Contacts','con.title':'Contact<br>Us','con.sub':'We provide assistance and consultations on investment and business development in the region.',
+    'con.phone':'Phone','con.addr':'Address','con.addrVal':'Private Industrial Zone «Koyandı», Akmola Region',
+    'con.note':'Established under the Law of Kazakhstan dated 03.04.2019 «On Special Economic and Industrial Zones in the Republic of Kazakhstan»',
+    'form.title':'Send Request','form.sub':'Leave an application — our team will contact you within a business day.',
+    'form.name':'Name *','form.company':'Company','form.phone':'Phone *','form.industry':'Industry','form.selectIndustry':'Select industry','form.msg':'Message','form.submit':'Send Request','form.other':'Other',
+    'modal.formSub':'Fill out the form — our team will contact you within a business day.',
+    'footer.desc':'PIZ «Koyandı» — a specialized platform for industrial and logistics enterprises near Astana, Kazakhstan.',
+    'footer.nav':'Navigation','footer.company':'Company','footer.legal':'Legal Information',
+    'footer.copy':'© PIZ «Koyandı», 2024. All rights reserved.',
+    'footer.law':'Law of Kazakhstan dated 03.04.2019 «On Special Economic and Industrial Zones»',
+    'legal.privacy':'Privacy Policy','legal.terms':'Terms of Use','legal.cookie':'Cookie Policy',
+    'cookie.txt':'We use cookies to improve the website experience.','cookie.accept':'Accept',
+    'toast.success':'Request sent successfully! We will contact you within a business day.','toast.popup':'Application sent! We will contact you shortly.','toast.error':'Please fill in all required fields.',
+  },
+  zh: {
+    'nav.about':'关于园区','nav.infra':'基础设施','nav.pref':'优惠政策',
+    'nav.services':'服务','nav.invest':'投资','nav.news':'新闻','nav.contacts':'联系我们',
+    'cta.apply':'提交申请','cta.learn':'了解更多',
+    'hero.badge':'哈萨克斯坦 · 阿克莫拉州 · 阿斯塔纳',
+    'hero.title':'私人工业<br>园区 <span class="g">«科扬德»</span>',
+    'hero.sub':'您的企业——我们的发展领地。完善的基础设施、税收优惠以及从项目构想到生产启动的全程陪同服务。',
+    'stat.ha':'公顷土地','stat.res':'驻园企业','stat.year':'成立年份','stat.tax':'企业所得税',
+    'sec.video':'视频概览','video.title':'«科扬德»私人工业园区图片集与视频','video.sub':'浏览工业园区土地、正在实施的项目及基础设施。',
+    'sec.about':'关于园区','about.title':'关于私人<br>工业园区',
+    'about.sub':'«科扬德»私人工业园区是专为工业和物流企业建设的专业化基地，提供完整的基础设施解决方案。',
+    'about.s1l':'公顷土地面积','about.s1d':'工业园区总面积',
+    'about.s2l':'现有驻园企业','about.s2d':'正在实施战略项目的企业',
+    'about.s3l':'成立年份','about.s3d':'依据2019年4月3日哈萨克斯坦共和国法律',
+    'sec.infra':'基础设施','infra.title':'为您生产准备<br>完善的基础设施',
+    'infra.1t':'战略位置','infra.1d':'沿阿斯塔纳-巴甫洛达尔共和国公路，交通便利。',
+    'infra.2t':'电力供应','infra.2d':'接入容量6至25兆伏安的技术条件。',
+    'infra.3t':'供水','infra.3d':'园区内已钻两口水井，每口日供水量560立方米。',
+    'infra.4t':'燃气供应（规划中）','infra.4d':'计划于2025年底前引入燃气基础设施。',
+    'infra.5t':'进场道路','infra.5d':'已建成并铺设碎石的进场道路，全年可为重型设备提供可靠通行保障。',
+    'sec.pref':'优惠政策','pref.title':'发掘您企业<br>的潜力','pref.sub':'享受税收优惠、简化海关程序并获得高素质人才资源。',
+    'pref.1badge':'税收优惠','pref.1t':'最大化优惠','pref.1d':'显著的税收优惠，提高盈利能力，加速企业发展。',
+    'pref.2badge':'基础设施支持','pref.2t':'全程陪同','pref.2d':'项目全程陪同服务：从公用设施接入到设计和施工支持。',
+    'pref.3badge':'行政支持','pref.3t':'无官僚主义障碍','pref.3d':'企业注册、申领许可证和执照过程中的咨询与协助。',
+    'tax.cit':'企业所得税','tax.vat':'增值税','tax.prop':'财产税','tax.cust':'关税',
+    'sec.residents':'驻园企业','res.title':'«科扬德»私人工业园区驻园企业','res.sub':'在工业园区内实施具有战略意义项目的企业。',
+    'res.1tag':'农工综合体 · 乳制品','res.1d':'建设生产富含果胶、菊粉和维生素的生态乳制品医疗保健食品综合体。',
+    'res.2tag':'环保包装 · 物流','res.2d':'专营液态食品用创新环保包装的供应与转口贸易。',
+    'res.3tag':'饲料 · 畜牧业','res.3d':'生产用于牛、羊、马、禽类及野生动物的有机饲料。',
+    'res.more':'了解更多 →','res.ctaTitle':'您的项目可以在这里',
+    'res.ctaSub':'成为哈萨克斯坦工业增长的一部分。«科扬德»私人工业园区提供基础设施、优惠政策以及从构想到生产启动的全程陪同服务。',
+    'sec.services':'服务','srv.title':'我们的综合支持','srv.sub':'管理公司提供广泛的服务，助力顺畅的投资流程。',
+    'srv.1t':'商业项目开发','srv.1d':'在各行业提供咨询和项目开发服务。',
+    'srv.2t':'申领必要许可证','srv.2d':'协助办理和申领生产启动所需的全部文件和许可证。',
+    'srv.3t':'施工陪同','srv.3d':'组织和监督交钥匙工程建设，包括公用设施接入。',
+    'sec.invest':'投资','inv.title':'投资<br>机遇','inv.sub':'«科扬德»私人工业园区管理公司不仅提供完善的基础设施，还积极协助从国际开发银行吸引融资。',
+    'inv.n1':'资助项目规模','inv.n2':'最低自有资金比例',
+    'inv.i1':'选址','inv.i2':'审批技术条件','inv.i3':'法律支持','inv.i4':'融资','inv.i5':'建设','inv.i6':'启动',
+    'inv.stepsLbl':'启动阶段','inv.stepsTitle':'合作条款<br>与启动阶段','inv.stepsSub':'我们从构想到生产启动全程陪同项目。',
+    'inv.st1time':'1-2个月','inv.st1t':'初步申请和合伙模式','inv.st1d':'管理公司以股权合伙方式（10%至30%）与项目持有人合作。',
+    'inv.st2time':'3-6个月','inv.st2t':'财务条款和项目确认','inv.st2d':'项目被确认符合标准后，项目持有人支付项目总成本的1%。',
+    'inv.st3time':'2-3个月','inv.st3t':'签署协议和启动项目工程','inv.st3d':'签署入驻协议，完成土地法律登记，接入公用设施，启动设计和建设工程。',
+    'sec.dir':'方向','dir.title':'«科扬德»私人工业园区<br>优先发展方向','dir.sub':'我们支持哈萨克斯坦可持续增长关键行业的投资项目。',
+    'dir.1t':'农业与粮食安全','dir.1d':'农工综合体、加工生产企业。',
+    'dir.2t':'替代能源','dir.2d':'太阳能、风能和沼气能源。',
+    'dir.3t':'废物处理','dir.3d':'工业和生活废物的收集、分拣和回收。',
+    'dir.4t':'医疗卫生与制药','dir.4d':'制药生产和医疗实验室。',
+    'dir.5t':'工业生产','dir.5d':'机械制造、轻工业、包装。',
+    'dir.6t':'航空','dir.6d':'零部件制造、航空物流。',
+    'dir.7t':'交通与物流','dir.7d':'仓储中心、多式联运平台。',
+    'dir.8t':'城市建设与基础设施','dir.8d':'工程基础设施综合开发。',
+    'sec.news':'新闻与媒体','news.title':'新闻与媒体报道','news.sub':'通过官方公告和商业媒体报道，关注«科扬德»私人工业园区的发展动态。',
+    'month.jun':'6月','month.may':'5月','month.apr':'4月','month.feb':'2月',
+    'news.1t':'阿联酋投资者在阿克莫拉州建设乳品厂','news.1s':'«科扬德»私人工业园区框架内的国际合作持续扩展。',
+    'news.2t':'Biolife Proprevit项目奠基仪式将于2025年6月24日举行','news.2s':'«INIIP AGROHOLDING BAYAN»有限责任公司启动乳品综合体建设。',
+    'news.3t':'克罗地亚参与的新乳品项目在哈萨克斯坦启动','news.3s':'阿扎马特·潘巴耶夫与克罗地亚共和国大使会面。',
+    'news.4t':'阿斯塔纳郊外将为矿工建设乳品厂','news.4s':'为采矿业工人提供营养保障的新项目。',
+    'news.5t':'交通部长与«Exim Finance»董事会主席会面','news.5s':'就大型基础设施项目融资进行谈判。',
+    'news.6t':'投资者讨论«科扬德»工业区发展前景','news.6s':'与国际投资者和政府机构举行战略会议。',
+    'news.read':'阅读 →',
+    'sec.team':'团队','team.title':'«科扬德»私人工业园区团队','team.sub':'为投资项目提供专业陪同服务的专家团队。',
+    'team.1role':'管理层','team.1title':'«科扬德»私人工业园区管理公司总经理','team.1d':'负责项目的战略发展和全面管理。',
+    'team.2role':'项目管理','team.2title':'项目督导 · 建筑公司关系总监','team.2d':'从设计图纸到竣工验收全程陪同每个建设项目。',
+    'team.3role':'建设','team.3title':'总承包商','team.3d':'拥有30余年建筑领域经验，负责全部建设工程的实施。',
+    'sec.partners':'合作伙伴','partners.title':'我们的合作伙伴','partners.sub':'我们与行业领先企业合作，支持工业园区内的项目发展。',
+    'sec.contacts':'联系我们','con.title':'联系<br>我们','con.sub':'我们就投资和区域业务发展相关问题提供帮助与咨询。',
+    'con.phone':'电话','con.addr':'地址','con.addrVal':'«科扬德»私人工业园区，阿克莫拉州',
+    'con.note':'依据哈萨克斯坦共和国2019年4月3日《哈萨克斯坦共和国特别经济区和工业园区法》设立',
+    'form.title':'发送申请','form.sub':'提交申请——我们的团队将在工作日内与您联系。',
+    'form.name':'姓名 *','form.company':'公司','form.phone':'电话 *','form.industry':'行业','form.selectIndustry':'选择行业','form.msg':'留言','form.submit':'发送申请','form.other':'其他',
+    'modal.formSub':'填写表格——我们的团队将在工作日内与您联系。',
+    'footer.desc':'«科扬德»私人工业园区——哈萨克斯坦阿斯塔纳附近专为工业和物流企业打造的专业化基地。',
+    'footer.nav':'导航','footer.company':'公司','footer.legal':'法律信息',
+    'footer.copy':'© «科扬德»私人工业园区，2024年。版权所有。',
+    'footer.law':'哈萨克斯坦共和国2019年4月3日《特别经济区和工业园区法》',
+    'legal.privacy':'隐私政策','legal.terms':'用户协议','legal.cookie':'Cookie政策',
+    'cookie.txt':'我们使用Cookie来改善网站体验。','cookie.accept':'接受',
+    'toast.success':'申请发送成功！我们将在工作日内与您联系。','toast.popup':'申请已发送！我们将尽快与您联系。','toast.error':'请填写所有必填字段。',
+  }
+};
+
+
+let currentLang = 'ru';
+
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = i18n[lang];
+  ['ru','kz','en','zh'].forEach(l => {
+    const d = document.getElementById('lng-'+l);
+    const m = document.getElementById('mlng-'+l);
+    if(d) d.classList.toggle('active', l===lang);
+    if(m) m.classList.toggle('active', l===lang);
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'kz' ? 'kk' : lang;
+}
+
+
+/* ═══════════════ NAV ═══════════════ */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', scrollY > 20); }, { passive: true });
 
-// PARALLAX
+
+/* ═══════════════ PARALLAX ═══════════════ */
 const heroBg = document.getElementById('heroBg');
 window.addEventListener('scroll', () => {
   if (scrollY < innerHeight) heroBg.style.transform = `scale(1.1) translateY(${scrollY * 0.25}px)`;
 }, { passive: true });
 
-// BURGER
+
+/* ═══════════════ BURGER ═══════════════ */
 const burger = document.getElementById('burger');
 const mobileNav = document.getElementById('mobileNav');
+let menuOpen = false;
+
+
+function openMobile() {
+  menuOpen = true;
+  mobileNav.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => { mobileNav.classList.add('open'); }));
+  burger.setAttribute('aria-expanded', 'true');
+  const spans = burger.querySelectorAll('span');
+  spans[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+  spans[1].style.opacity = '0';
+  spans[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+  document.body.style.overflow = 'hidden';
+}
+
+
 function closeMobile() {
+  menuOpen = false;
   mobileNav.classList.remove('open');
-  burger.classList.remove('open');
+  setTimeout(() => { if(!menuOpen) mobileNav.style.display = 'none'; }, 350);
   burger.setAttribute('aria-expanded', 'false');
+  const spans = burger.querySelectorAll('span');
+  spans[0].style.transform = '';
+  spans[1].style.opacity = '';
+  spans[2].style.transform = '';
   document.body.style.overflow = '';
 }
-burger.addEventListener('click', () => {
-  const o = mobileNav.classList.toggle('open');
-  burger.classList.toggle('open', o);
-  burger.setAttribute('aria-expanded', o);
-  document.body.style.overflow = o ? 'hidden' : '';
-});
+
+
+burger.addEventListener('click', () => { menuOpen ? closeMobile() : openMobile(); });
 document.querySelectorAll('.mnl').forEach(l => l.addEventListener('click', closeMobile));
 
-// SCROLL ANIMATIONS
+
+/* ═══════════════ SCROLL ANIMATIONS ═══════════════ */
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fu').forEach(el => io.observe(el));
 
-// SCROLL TOP
+
+/* ═══════════════ SCROLL TOP ═══════════════ */
 const st = document.getElementById('scrollTop');
 window.addEventListener('scroll', () => { st.classList.toggle('vis', scrollY > 300); }, { passive: true });
 st.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// MODALS
+
+/* ═══════════════ MODALS ═══════════════ */
 function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); if (!document.querySelector('.modal-ov.open')) document.body.style.overflow = ''; }
 document.querySelectorAll('.modal-ov').forEach(o => o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); }));
@@ -1011,7 +1451,8 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// TOAST
+
+/* ═══════════════ TOAST ═══════════════ */
 function toast(msg, type = 'success') {
   const w = document.getElementById('toastWrap');
   const t = document.createElement('div');
@@ -1022,38 +1463,85 @@ function toast(msg, type = 'success') {
   setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 4000);
 }
 
-// FORM VALIDATION
+
+/* ═══════════════ FORMS ═══════════════ */
 function validate(form) {
   let ok = true;
   form.querySelectorAll('[required]').forEach(f => {
     f.style.borderColor = '';
     const v = f.value.trim();
-    const bad = !v || (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+    const bad = !v;
     if (bad) { f.style.borderColor = '#f87171'; if (ok) f.focus(); ok = false; }
   });
   return ok;
 }
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  if (!validate(this)) { toast('Пожалуйста, заполните все обязательные поля.', 'error'); return; }
-  toast('Запрос успешно отправлен! Свяжемся с вами в течение рабочего дня.');
+  const t = i18n[currentLang];
+  if (!validate(this)) { toast(t['toast.error'], 'error'); return; }
+  toast(t['toast.success']);
   this.reset();
 });
 document.getElementById('popupForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  if (!validate(this)) { toast('Пожалуйста, заполните все обязательные поля.', 'error'); return; }
-  toast('Заявка отправлена! Свяжемся с вами в ближайшее время.');
+  const t = i18n[currentLang];
+  if (!validate(this)) { toast(t['toast.error'], 'error'); return; }
+  toast(t['toast.popup']);
   this.reset();
   closeModal('modalForm');
 });
 
-// COOKIE
+
+/* ═══════════════ COOKIE ═══════════════ */
 const cookieBanner = document.getElementById('cookie');
 if (localStorage.getItem('ckz')) cookieBanner.classList.add('hidden');
 document.getElementById('cookieAcc').addEventListener('click', () => {
   localStorage.setItem('ckz', '1');
   cookieBanner.classList.add('hidden');
 });
+
+
+/* ═══════════════ CUSTOM CURSOR (desktop only) ═══════════════ */
+(function() {
+  // Only init cursor on pointer:fine devices (non-touch)
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+
+  const ring = document.getElementById('cursorRing');
+  const dotWrap = document.getElementById('cursorDotWrap');
+  const circleWrap = document.getElementById('cursorCircleWrap');
+
+
+  let mx = -100, my = -100, cx = -100, cy = -100;
+
+
+  function lerp(a, b, n) { return (1 - n) * a + n * b; }
+
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dotWrap.style.transform = `translate(${mx}px,${my}px)`;
+  }, { passive: true });
+
+
+  function animateCursor() {
+    cx = lerp(cx, mx, 0.12);
+    cy = lerp(cy, my, 0.12);
+    circleWrap.style.transform = `translate(${cx}px,${cy}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+
+  const hoverTargets = 'a, button, [role="button"], .card, .dir-card, .p-logo, .soc-btn, input, select, textarea, .n-arr, .res-link';
+  document.addEventListener('mouseover', e => { if (e.target.closest(hoverTargets)) ring.classList.add('hovered'); });
+  document.addEventListener('mouseout', e => { if (e.target.closest(hoverTargets)) ring.classList.remove('hovered'); });
+  document.addEventListener('mousedown', () => ring.classList.add('clicked'));
+  document.addEventListener('mouseup', () => ring.classList.remove('clicked'));
+  document.addEventListener('mouseleave', () => { ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { ring.style.opacity = '1'; });
+})();
 </script>
 </body>
 </html>
+
